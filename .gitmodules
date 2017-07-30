@@ -1,0 +1,12 @@
+[submodule "personal-homepage-demo/v0.1"]
+	path = personal-homepage-demo/v0.1
+	url = https://github.com/dmep2017/dmep-personal-homepage-demo.git
+[submodule "personal-homepage-demo/v0.2"]
+	path = personal-homepage-demo/v0.2
+	url = https://github.com/dmep2017/dmep-personal-homepage-demo.git
+[submodule "personal-homepage-demo/v0.3"]
+	path = personal-homepage-demo/v0.3
+	url = https://github.com/dmep2017/dmep-personal-homepage-demo.git
+[submodule "personal-homepage-demo/v0.4"]
+	path = personal-homepage-demo/v0.4
+	url = https://github.com/dmep2017/dmep-personal-homepage-demo.git
