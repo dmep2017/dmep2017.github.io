@@ -19,13 +19,37 @@
         
         .main {
             width: 46%;
-            min-height: 400;
+            min-height: 200px;
         }
         
         .left,
         .right {
             width: 20%;
-            min-height: 400;
+            min-height: 200px;
+        }
+        
+        @media (max-width:800px) {
+            .main {
+                width: 70%;
+            }
+            .right {
+                width: 96%;
+                min-height: 100px;
+            }
+        }
+        
+        @media (max-width:500px) {
+            .left {
+                width: 96%;
+            }
+            .main {
+                width: 96%;
+            }
+            .right {
+                display: none
+                /*visibility: hidden;*/
+                /*Uncomment the above to see what happens*/
+            }
         }
     </style>
 
