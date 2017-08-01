@@ -7,5 +7,5 @@
 
 * Demo: [Site](https://hupilidemo.github.io/) [GitHub](https://github.com/hupilidemo)
 * Demo2: [Site2](https://hupilidemo.github.io/) [GitHub2](https://github.com/hupilidemo)
-* Student: ...
+* Student: 。。。
 
