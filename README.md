@@ -1,5 +1,7 @@
 This is development branch.
 
+More updates on develop branch.
+
 # Frontend - DMEP2017 Summer Course 
 
 * Time: July 31 - Aug 12
