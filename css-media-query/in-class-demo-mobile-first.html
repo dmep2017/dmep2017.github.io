@@ -13,6 +13,31 @@
         #main {
             height: 150px;
         }
+        
+        @media (min-width: 760px) {
+            #main,
+            #ads {
+                height: 200px;
+                display: inline-block;
+            }
+            #main {
+                width: 80%;
+            }
+            #ads {
+                width: 15%;
+            }
+        }
+        
+        @media (min-width: 1000px) {
+            #main {
+                width: 60%;
+            }
+            #sidebar {
+                display: inline-block;
+                height: 200px;
+                width: 20%;
+            }
+        }
     </style>
 </head>
 
