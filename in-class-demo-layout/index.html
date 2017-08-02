@@ -3,15 +3,21 @@
 <head>
     <style>
         div {
+            position: relative;
             width: 200px;
             height: 150px;
-            overflow: hidden;
+            /* overflow: hidden; */
+            background-color: khaki;
+            margin: 10px;
         }
         
         span {
-            display: block;
-            width: 50px;
-            height: 50px;
+            position: absolute;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: darkblue;
+            border-radius: 50%;
         }
     </style>
 
@@ -21,10 +27,10 @@
     my body
     <div>
         div 1
-        <span>span 1</span>
-        <span>span 2</span>
-        <span>span 3</span>
-        <span>span 4</span>
+        <span style="left: 100px;top: 10px;">span 1</span>
+        <span style="left: 100px;top: 70px;">span 2</span>
+        <span style="left: 10px;top: 20px;">span 3</span>
+        <span style="left: 50px;top: 30px;">span 4</span>
     </div>
     <div>div 2</div>
     <div>div 3</div>
