@@ -12,13 +12,17 @@
 
         var option = {
             "title": {
-                "text": "Hong Kong Population by gender",
+                "text": "Population by gender",
+                "show": true,
+                "textStyle": {
+                    "color": "red",
+                }
             },
             "xAxis": [{
                 "type": "category",
                 "data": [
-                    1991,
-                    1996,
+                    'Year 1991',
+                    'Year 1996',
                     2001
                 ],
                 "axisTick": {
@@ -30,7 +34,7 @@
             }],
             "series": [{
                 "name": "Male",
-                "type": "bar",
+                "type": "line",
                 "data": [
                     2811991,
                     3108107,
@@ -44,6 +48,7 @@
                     3109449,
                     3423045
                 ],
+                "barWidth": "10px",
             }]
         };
 
