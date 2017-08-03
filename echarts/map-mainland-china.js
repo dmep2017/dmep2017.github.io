@@ -549,4 +549,4 @@ geoJSON = {
 
 
 
-echarts.registerMap('GeoJSON', geoJSON);
+echarts.registerMap('china', geoJSON);
