@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <script src="echarts-master/dist/echarts.js"></script>
+</head>
+
+<body>
+    <p>Following is one chart:</p>
+    <div id="main" style="width:300px;height:300px"></div>
+    <script>
+        var myChart = echarts.init(document.getElementById('main'));
+
+        var option = {
+            "title": {
+                "text": "Hong Kong Population by gender",
+            },
+            "xAxis": [{
+                "type": "category",
+                "data": [
+                    1991,
+                    1996,
+                    2001
+                ],
+                "axisTick": {
+                    "alignWithLabel": true
+                }
+            }],
+            "yAxis": [{
+                "type": "value"
+            }],
+            "series": [{
+                "name": "Male",
+                "type": "bar",
+                "data": [
+                    2811991,
+                    3108107,
+                    3285344
+                ],
+            }, {
+                "name": "Female",
+                "type": "bar",
+                "data": [
+                    2710290,
+                    3109449,
+                    3423045
+                ],
+            }]
+        };
+
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>
