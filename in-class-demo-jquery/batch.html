@@ -34,6 +34,10 @@
 
 <body>
 
+    <div>
+        <button class="hide-button">Fake Hide Button</button>
+    </div>
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -49,8 +53,8 @@
                     <error>gramma</error>
                     <correction>syntax</correction> errors.
                 </p>
-                <showbutton class="" id="show">Show</showbutton>
-                <button class="hide-button" id="hide">Hide</button>
+                <myshowbutton class="">Show</myshowbutton>
+                <button class="hide-button">Hide</button>
                 <button class="btn" id="toggle">Toggle</button>
             </div>
         </div>
@@ -79,8 +83,8 @@
                 }
             }
 
-            $('showbutton').click(showAnswer);
-            $('div .hide-button').click(hideAnswer);
+            $('myshowbutton').click(showAnswer);
+            $('div div div .hide-button').click(hideAnswer);
             $('#toggle').click(toggleAnswer);
         })
     </script>
