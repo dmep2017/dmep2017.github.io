@@ -1,0 +1,54 @@
+<html>
+
+<head>
+
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <style>
+        .content div {
+            margin-top: 1em;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 content">
+                <div data-length="100">div 1</div>
+                <div data-length="250">div 2</div>
+                <div data-length="200">div 3</div>
+                <div data-length="50">div 1</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function() {
+            // console.log($('.content div'));
+            $('.content div').css('background-color', 'red')
+                // $('.content div').css('width', '50px')
+                // var e = $('.content div').get(1);
+                // console.log($(e).data());
+            $('.content div').map(function() {
+                var me = $(this);
+                console.log(me.data('length'));
+                me.css('width', me.data('length'))
+            })
+        })
+    </script>
+
+</body>
+
+</html>
