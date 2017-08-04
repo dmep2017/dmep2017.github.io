@@ -49,8 +49,8 @@
                     <error>gramma</error>
                     <correction>syntax</correction> errors.
                 </p>
-                <button class="btn" id="show">Show</button>
-                <button class="btn" id="hide">Hide</button>
+                <showbutton class="" id="show">Show</showbutton>
+                <button class="hide-button" id="hide">Hide</button>
                 <button class="btn" id="toggle">Toggle</button>
             </div>
         </div>
@@ -79,8 +79,8 @@
                 }
             }
 
-            $('#show').click(showAnswer);
-            $('#hide').click(hideAnswer);
+            $('showbutton').click(showAnswer);
+            $('div .hide-button').click(hideAnswer);
             $('#toggle').click(toggleAnswer);
         })
     </script>
