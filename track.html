@@ -47,18 +47,26 @@
             xmlHttp.send(null);
         }
 
+        function init() {
+            if (localStorage['demoUrl']) {
+                document.getElementById('demoUrl').value = localStorage['demoUrl'];
+            }
+        }
+
         function refresh() {
             var demoUrl = document.getElementById('demoUrl').value;
             document.getElementById('result').src = demoUrl;
             httpGetAsync(demoUrl, function(responseText) {
                 document.getElementById('code').innerText = responseText;
             })
+            localStorage['demoUrl'] = demoUrl;
         }
 
         document.getElementById('update').onclick = function() {
             refresh()
         }
 
+        init();
         refresh();
     </script>
 
