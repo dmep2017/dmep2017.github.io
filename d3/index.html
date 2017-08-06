@@ -30,7 +30,12 @@
                 <div class="col-md-6 col-md-offset-3">
                     <h1>D3 Demo</h1>
                     <div id="chart" style="width:300px;height:300px;border:1px dashed lightgrey">
-                        <svg width="100%" height="100%"></svg>
+                        <svg width="100%" height="100%">
+                            <g id="data"> </g>
+                            <g id="meta"> 
+                                <text id="caption">Year</text> 
+                            </g>
+                        </svg>
                     </div>
                 </div>
             </div>
@@ -68,6 +73,8 @@
 
 
         var svg = d3.select('#chart svg');
+        var dataGroup = svg.select('g#data');
+        var metaGroup = svg.select('g#meta');
         // svg.append('circle').attr('cx', 100).attr('cy', 100).attr('r', 10).style('fill', 'black');
         // var updateDataPoints = svg.data(data, function(d) {
         //     return d.country
@@ -79,8 +86,8 @@
 
         var margin = {
             top: 20,
-            right: 20,
-            bottom: 20,
+            right: 10,
+            bottom: 50,
             left: 20
         }
         var height = $('svg').height();
@@ -94,7 +101,7 @@
 
         var lifeScale = d3.scaleLinear()
             .domain(lifeDomain)
-            .range([height - margin.top, 0 + margin.bottom])
+            .range([height - margin.bottom, 0 + margin.top])
 
         var populationScale = d3.scaleLog()
             .domain(populationDomain)
@@ -107,7 +114,7 @@
             .scale(lifeScale)
 
         function update(data) {
-            var circles = svg.selectAll('circle').data(data, keyFunc)
+            var circles = dataGroup.selectAll('circle').data(data, keyFunc)
             circles
                 .enter()
                 .append('circle')
@@ -133,7 +140,7 @@
                     d3.select(this).remove()
                 })
 
-            var texts = svg.selectAll('text').data(data, keyFunc)
+            var texts = dataGroup.selectAll('text').data(data, keyFunc)
             texts
                 .enter()
                 .append('text')
@@ -164,10 +171,17 @@
         var dataOfTheYear = allData[yearIndex][1];
         var yearName = allData[yearIndex][0];
 
-        svg.append('g')
+        metaGroup.append('g')
             .attr('transform', 'translate(0, ' + (height - margin.bottom) + ')')
             .call(xAxis)
-        svg.append('g')
+            .selectAll("text")
+            .attr("y", 0)
+            .attr("x", 9)
+            .attr("dy", ".35em")
+            .attr("transform", "rotate(90)")
+            .style("text-anchor", "start");
+
+        metaGroup.append('g')
             .attr('transform', 'translate(' + margin.left + ', 0)')
             .call(yAxis)
 
@@ -182,6 +196,10 @@
             var dataOfTheYear = allData[yearIndex][1];
             var yearName = allData[yearIndex][0];
             update(dataOfTheYear);
+            metaGroup.select('#caption')
+                .text(yearName)
+                .attr('x', width / 2)
+                .attr('y', margin.top)
         }, 500)
     </script>
 
