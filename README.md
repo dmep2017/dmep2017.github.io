@@ -5,9 +5,6 @@
 
 ## Student List
 
-* Demo: [Site](https://hupilidemo.github.io/) [GitHub](https://github.com/hupilidemo)
-* Demo2: [Site2](https://hupilidemo.github.io/) [GitHub2](https://github.com/hupilidemo)
-
  - 祁鹏 https://joanna0520.github.io
  - 陈明 https://chenming117.github.io
  - 贾雨朦 https://jiayumengshirley.github.io
