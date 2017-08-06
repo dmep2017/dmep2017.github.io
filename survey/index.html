@@ -141,9 +141,15 @@
             }
 
             $('#submit').click(function() {
+                var submitButton = $(this);
                 console.log(answers);
                 postData('http://localhost:3000/surveys/', answers, function() {
                     console.log('done');
+                    var paragraph = submitButton.closest('.section').find('p');
+                    submitButton.fadeOut(500, function() {
+                        // fadeIn the paragrpah after button completely faded out.
+                        paragraph.fadeIn(500)
+                    });
                 })
             })
         });
