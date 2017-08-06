@@ -83,13 +83,20 @@
                 .attr('r', 10)
                 .style('fill', 'rgba(100,100,100,0.5)')
                 .merge(circles)
+                .transition()
                 .attr('cx', function(d, i) {
                     return d.GDP
                 })
                 .attr('cy', function(d, i) {
                     return d.Population
                 })
-            circles.exit().remove()
+            circles
+                .exit()
+                .transition()
+                .style('fill', 'rgba(100,100,100,0.0)')
+                .on('end', function() {
+                    d3.select(this).remove()
+                })
 
             var texts = svg.selectAll('text').data(data, keyFunc)
             texts
@@ -98,6 +105,7 @@
                 .attr('dy', '0.35em')
                 .attr('dx', '0.75em')
                 .merge(texts)
+                .transition()
                 .text(function(d) {
                     return d.country
                 })
@@ -107,11 +115,19 @@
                 .attr('y', function(d) {
                     return d.Population
                 })
-            texts.exit().remove()
+            texts
+                .exit()
+                .transition()
+                .style('fill', 'rgba(100,100,100,0.0)')
+                .on('end', function() {
+                    d3.select(this).remove()
+                })
         }
 
         update(data);
-        update(data2)
+        window.setTimeout(function() {
+            update(data2)
+        }, 2000)
     </script>
 
 </body>
