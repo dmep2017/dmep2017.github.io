@@ -105,8 +105,15 @@
     </div>
 
     <script>
+        // Following line is equivelent of 
+        // $(function(){...})
         $(document).ready(function() {
+
             $('#fullpage').fullpage();
+
+            $('.question .options a').click(function() {
+                $.fn.fullpage.moveSectionDown();
+            })
         });
     </script>
 </body>
