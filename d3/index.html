@@ -49,6 +49,22 @@
             GDP: 150,
             Population: 10
         }];
+
+        var data2 = [{
+            country: 'A',
+            GDP: 50,
+            Population: 80
+        }, {
+            country: 'D',
+            GDP: 250,
+            Population: 100
+        }, {
+            country: 'C',
+            GDP: 150,
+            Population: 120
+        }];
+
+
         var svg = d3.select('#chart svg');
         // svg.append('circle').attr('cx', 100).attr('cy', 100).attr('r', 10).style('fill', 'black');
         // var updateDataPoints = svg.data(data, function(d) {
@@ -60,11 +76,27 @@
         enterDatapoints
             .append('circle')
             .attr('r', 10)
-            .style('fill', 'black')
+            .style('fill', 'rgba(100,100,100,0.5)')
             .attr('cx', function(d, i) {
                 return d.GDP
             })
             .attr('cy', function(d, i) {
+                return d.Population
+            })
+
+        svg.selectAll('text')
+            .data(data)
+            .enter()
+            .append('text')
+            .attr('dy', '0.35em')
+            .attr('dx', '0.75em')
+            .text(function(d) {
+                return d.country
+            })
+            .attr('x', function(d) {
+                return d.GDP
+            })
+            .attr('y', function(d) {
                 return d.Population
             })
     </script>
