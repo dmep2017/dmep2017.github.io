@@ -36,8 +36,37 @@
     </div>
 
     <script>
+        var data = [{
+            country: 'A',
+            GDP: 200,
+            Population: 100
+        }, {
+            country: 'B',
+            GDP: 50,
+            Population: 50
+        }, {
+            country: 'C',
+            GDP: 150,
+            Population: 10
+        }];
         var svg = d3.select('#chart svg');
-        svg.append('circle').attr('cx', 100).attr('cy', 100).attr('r', 10).style('fill', 'black');
+        // svg.append('circle').attr('cx', 100).attr('cy', 100).attr('r', 10).style('fill', 'black');
+        // var updateDataPoints = svg.data(data, function(d) {
+        //     return d.country
+        // });
+        var updateDataPoints = svg.selectAll('circle').data(data);
+        var enterDatapoints = updateDataPoints.enter();
+
+        enterDatapoints
+            .append('circle')
+            .attr('r', 10)
+            .style('fill', 'black')
+            .attr('cx', function(d, i) {
+                return d.GDP
+            })
+            .attr('cy', function(d, i) {
+                return d.Population
+            })
     </script>
 
 </body>
