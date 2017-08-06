@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--
+    fullPage reference:
+    Start your HTML document with the compulsory HTML DOCTYPE declaration on the 1st line of your HTML code. You might have troubles with sections heights otherwise. The examples provided use HTML 5 doctype <!DOCTYPE html>.
+  -->
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script src="fullPage.js-master/dist/jquery.fullpage.min.js"></script>
+    <link rel="stylesheet" href="fullPage.js-master/dist/jquery.fullpage.min.css">
+
+    <title>Survey Demo</title>
+
+    <style>
+        .question {}
+        
+        .options a {
+            margin-top: 1em
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="fullpage">
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="question">
+                            <h2>Do you love Frontend?</h2>
+                            <div class="options">
+                                <a class="btn btn-primary form-control input-block-level">Yes</a>
+                                <a class="btn btn-default form-control input-block-level">Not Sure</a>
+                                <a class="btn btn-danger form-control input-block-level">No</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Use "active" class to bring up that section when start. Useful for debugging. -->
+        <!-- <div class="section active"> -->
+
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="question">
+                            <h2>Which spelling is correct?</h2>
+                            <div class="options">
+                                <a class="btn btn-default form-control input-block-level">Frontend</a>
+                                <a class="btn btn-default form-control input-block-level">FrontEnd</a>
+                                <a class="btn btn-default form-control input-block-level">Front-end</a>
+                                <a class="btn btn-default form-control input-block-level">Front-End</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="question">
+                            <h2>Select the most confusing thing in the past week:</h2>
+                            <div class="options">
+                                <a class="btn btn-default form-control input-block-level">HTML</a>
+                                <a class="btn btn-default form-control input-block-level">CSS</a>
+                                <a class="btn btn-default form-control input-block-level">Javascript</a>
+                                <a class="btn btn-default form-control input-block-level">eCharts</a>
+                                <a class="btn btn-default form-control input-block-level">jQuery</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section active">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <h2>Thanks!</h2>
+                        <p>Your feedback is well received.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#fullpage').fullpage();
+        });
+    </script>
+</body>
