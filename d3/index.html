@@ -125,8 +125,17 @@
         }
 
         update(data);
-        window.setTimeout(function() {
-            update(data2)
+        // window.setTimeout(function() {
+        //     update(data2)
+        // }, 2000)
+
+        d3.interval(function() {
+            data = data.map(function(d) {
+                var newData = d;
+                newData.GDP = d.GDP + (Math.random() * 50 - 25);
+                return newData
+            })
+            update(data);
         }, 2000)
     </script>
 
