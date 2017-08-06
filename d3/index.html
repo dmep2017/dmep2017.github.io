@@ -70,35 +70,48 @@
         // var updateDataPoints = svg.data(data, function(d) {
         //     return d.country
         // });
-        var updateDataPoints = svg.selectAll('circle').data(data);
-        var enterDatapoints = updateDataPoints.enter();
 
-        enterDatapoints
-            .append('circle')
-            .attr('r', 10)
-            .style('fill', 'rgba(100,100,100,0.5)')
-            .attr('cx', function(d, i) {
-                return d.GDP
-            })
-            .attr('cy', function(d, i) {
-                return d.Population
-            })
+        var keyFunc = function(d) {
+            return d.country;
+        }
 
-        svg.selectAll('text')
-            .data(data)
-            .enter()
-            .append('text')
-            .attr('dy', '0.35em')
-            .attr('dx', '0.75em')
-            .text(function(d) {
-                return d.country
-            })
-            .attr('x', function(d) {
-                return d.GDP
-            })
-            .attr('y', function(d) {
-                return d.Population
-            })
+        function update(data) {
+            var circles = svg.selectAll('circle').data(data, keyFunc)
+            circles
+                .enter()
+                .append('circle')
+                .attr('r', 10)
+                .style('fill', 'rgba(100,100,100,0.5)')
+                .merge(circles)
+                .attr('cx', function(d, i) {
+                    return d.GDP
+                })
+                .attr('cy', function(d, i) {
+                    return d.Population
+                })
+            circles.exit().remove()
+
+            var texts = svg.selectAll('text').data(data, keyFunc)
+            texts
+                .enter()
+                .append('text')
+                .attr('dy', '0.35em')
+                .attr('dx', '0.75em')
+                .merge(texts)
+                .text(function(d) {
+                    return d.country
+                })
+                .attr('x', function(d) {
+                    return d.GDP
+                })
+                .attr('y', function(d) {
+                    return d.Population
+                })
+            texts.exit().remove()
+        }
+
+        update(data);
+        update(data2)
     </script>
 
 </body>
