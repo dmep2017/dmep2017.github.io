@@ -77,18 +77,24 @@
             return d[0];
         }
 
-        var height = 300;
-        var width = 300;
+        var margin = {
+            top: 20,
+            right: 20,
+            bottom: 20,
+            left: 20
+        }
+        var height = $('svg').height();
+        var width = $('svg').width();
         var minBubbleSize = 2;
         var maxBubbleSize = 20;
 
         var gdpScale = d3.scaleLinear()
             .domain(gdpDomain)
-            .range([0, width])
+            .range([0 + margin.left, width - margin.right])
 
         var lifeScale = d3.scaleLinear()
             .domain(lifeDomain)
-            .range([height, 0])
+            .range([height - margin.top, 0 + margin.bottom])
 
         var populationScale = d3.scaleLog()
             .domain(populationDomain)
@@ -158,8 +164,11 @@
         var dataOfTheYear = allData[yearIndex][1];
         var yearName = allData[yearIndex][0];
 
-        svg
+        svg.append('g')
+            .attr('transform', 'translate(0, ' + (height - margin.bottom) + ')')
             .call(xAxis)
+        svg.append('g')
+            .attr('transform', 'translate(' + margin.left + ', 0)')
             .call(yAxis)
 
         update(dataOfTheYear);
