@@ -1,0 +1,22 @@
+{
+  "surveys": [
+    {
+      "q1": null,
+      "q2": null,
+      "q3": null,
+      "id": 1
+    },
+    {
+      "q1": 1,
+      "q2": "Front-end",
+      "q3": "eCharts",
+      "id": 2
+    },
+    {
+      "q1": -1,
+      "q2": "Front-End",
+      "q3": "jQuery",
+      "id": 3
+    }
+  ]
+}
