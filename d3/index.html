@@ -16,6 +16,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <script src="data/all_data.js"></script>
+
     <title></title>
 
 </head>
@@ -72,8 +74,31 @@
         // });
 
         var keyFunc = function(d) {
-            return d.country;
+            return d[0];
         }
+
+        var height = 300;
+        var width = 300;
+        var minBubbleSize = 2;
+        var maxBubbleSize = 20;
+
+        var gdpScale = d3.scaleLinear()
+            .domain(gdpDomain)
+            .range([0, width])
+
+        var lifeScale = d3.scaleLinear()
+            .domain(lifeDomain)
+            .range([height, 0])
+
+        var populationScale = d3.scaleLog()
+            .domain(populationDomain)
+            .range([minBubbleSize, maxBubbleSize])
+
+        var xAxis = d3.axisBottom()
+            .scale(gdpScale)
+
+        var yAxis = d3.axisLeft()
+            .scale(lifeScale)
 
         function update(data) {
             var circles = svg.selectAll('circle').data(data, keyFunc)
@@ -81,15 +106,19 @@
                 .enter()
                 .append('circle')
                 .attr('r', 10)
-                .style('fill', 'rgba(100,100,100,0.5)')
+                .style('fill', 'rgba(100,100,100,0.2)')
                 .merge(circles)
                 .transition()
                 .attr('cx', function(d, i) {
-                    return d.GDP
+                    return gdpScale(d[1]['gdp_pc'])
                 })
                 .attr('cy', function(d, i) {
-                    return d.Population
+                    return lifeScale(d[1]['life'])
                 })
+                .attr('r', function(d, i) {
+                    return populationScale(d[1]['population'])
+                })
+
             circles
                 .exit()
                 .transition()
@@ -104,16 +133,17 @@
                 .append('text')
                 .attr('dy', '0.35em')
                 .attr('dx', '0.75em')
+                .style('fill', 'rgba(100,100,100,0.5)')
                 .merge(texts)
                 .transition()
                 .text(function(d) {
-                    return d.country
+                    return d[0]
                 })
                 .attr('x', function(d) {
-                    return d.GDP
+                    return gdpScale(d[1]['gdp_pc'])
                 })
                 .attr('y', function(d) {
-                    return d.Population
+                    return lifeScale(d[1]['life'])
                 })
             texts
                 .exit()
@@ -124,19 +154,26 @@
                 })
         }
 
-        update(data);
+        var yearIndex = 0;
+        var dataOfTheYear = allData[yearIndex][1];
+        var yearName = allData[yearIndex][0];
+
+        svg
+            .call(xAxis)
+            .call(yAxis)
+
+        update(dataOfTheYear);
+
         // window.setTimeout(function() {
         //     update(data2)
         // }, 2000)
 
         d3.interval(function() {
-            data = data.map(function(d) {
-                var newData = d;
-                newData.GDP = d.GDP + (Math.random() * 50 - 25);
-                return newData
-            })
-            update(data);
-        }, 2000)
+            yearIndex = (yearIndex + 1) % allData.length;
+            var dataOfTheYear = allData[yearIndex][1];
+            var yearName = allData[yearIndex][0];
+            update(dataOfTheYear);
+        }, 500)
     </script>
 
 </body>
