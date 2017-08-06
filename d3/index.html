@@ -27,10 +27,17 @@
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
                     <h1>D3 Demo</h1>
-
+                    <div id="chart" style="width:300px;height:300px;border:1px dashed lightgrey">
+                        <svg width="100%" height="100%"></svg>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        var svg = d3.select('#chart svg');
+        svg.append('circle').attr('cx', 100).attr('cy', 100).attr('r', 10).style('fill', 'black');
+    </script>
 
 </body>
