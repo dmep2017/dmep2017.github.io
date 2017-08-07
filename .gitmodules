@@ -10,3 +10,6 @@
 [submodule "personal-homepage-demo/v0.4"]
 	path = personal-homepage-demo/v0.4
 	url = https://github.com/dmep2017/dmep-personal-homepage-demo.git
+[submodule "interactive-game-demo"]
+	path = interactive-game-demo
+	url = https://github.com/dmep2017/interactive-game-demo.git
