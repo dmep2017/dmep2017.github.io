@@ -84,12 +84,26 @@
                 .on('end', function() {
                     d3.select(this).remove()
                 })
+
+            svg.selectAll('circle')
+                .on('click', function() {
+                    console.log('here');
+                    d3.select(this).remove()
+                })
+
+            svg.on('click', function() {
+                console.log('there');
+                svg.append('circle')
+                    .attr('r', 20)
+                    .attr('cx', d3.event.clientX)
+                    .attr('cy', d3.event.clientY)
+            })
         }
 
         updateChart(data)
-        setTimeout(function() {
-            updateChart(data2)
-        }, 3000)
+            // setTimeout(function() {
+            //     updateChart(data2)
+            // }, 3000)
     </script>
 </body>
 
