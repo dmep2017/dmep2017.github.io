@@ -26,3 +26,4 @@
  - 梁轶琳 https://elaineliang.github.io
  - 赵欣 https://cicindyzhao.github.io
  - 邵海涵 https://brandworld.github.io
+ - 陈嘉慧	https://trishsky.github.io/
