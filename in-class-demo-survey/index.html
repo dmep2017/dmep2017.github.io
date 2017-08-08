@@ -1,0 +1,114 @@
+<html>
+
+<head>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+    <script src="fullPage.js-master/dist/jquery.fullpage.js"></script>
+
+    <link rel="stylesheet" href="fullPage.js-master/dist/jquery.fullpage.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+    <div id="fullpage">
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div data-question="q1" class="question col-md-6 col-md-offset-3">
+                        <h2>Do you like frontend? </h2>
+                        <button data-option="Yes" class="option btn">Yes</button>
+                        <button data-option="No" class="option btn">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div data-question="q2" class="question col-md-6 col-md-offset-3">
+                        <h2>Which one is correct spelling? </h2>
+                        <button data-option="Frontend" class="option btn form-control btn-primary">Frontend</button>
+                        <button data-option="Front-end" class="option btn form-control">Front-end</button>
+                        <button data-option="FrontEnd" class="option btn form-control">FrontEnd</button>
+                        <button data-option="Front-End" class="option btn form-control btn-danger">Front-End</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="section active">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <h2></h2>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <h2>Thanks! </h2>
+                        <button id="submit" class="btn">Submit result</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        $(document).ready(function() {
+
+            var postData = function(url, data, callback) {
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: JSON.stringify(data),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: callback
+                })
+            }
+
+            var answers = {
+                q1: null,
+                q2: null,
+            }
+            $('#fullpage').fullpage();
+
+            $('.option').click(function() {
+                var me = $(this);
+                $.fn.fullpage.moveSectionDown();
+                var question = me.closest('.question').data('question');
+                var option = me.data('option');
+                answers[question] = option;
+            })
+
+            $('#submit').click(function() {
+                console.log(answers);
+                postData('http://localhost:3000/answers/',
+                    answers,
+                    function() {
+                        console.log('here');
+                    })
+            })
+        });
+    </script>
+</body>
+
+</html>

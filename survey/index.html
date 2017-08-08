@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!--
+    fullPage reference:
+    Start your HTML document with the compulsory HTML DOCTYPE declaration on the 1st line of your HTML code. You might have troubles with sections heights otherwise. The examples provided use HTML 5 doctype <!DOCTYPE html>.
+  -->
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script src="fullPage.js-master/dist/jquery.fullpage.min.js"></script>
+    <link rel="stylesheet" href="fullPage.js-master/dist/jquery.fullpage.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Survey Demo</title>
+
+    <style>
+        .question {}
+        
+        .options a {
+            margin-top: 1em
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="fullpage">
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div data-question="q1" class="question">
+                            <h2>Q1: Do you love Frontend?</h2>
+                            <div class="options">
+                                <a data-option="1" class="btn btn-primary form-control input-block-level">Yes</a>
+                                <a data-option="0" class="btn btn-default form-control input-block-level">Not Sure</a>
+                                <a data-option="-1" class="btn btn-danger form-control input-block-level">No</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Use "active" class to bring up that section when start. Useful for debugging. -->
+        <!-- <div class="section active"> -->
+
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div data-question="q2" class="question">
+                            <h2>Q2: Which spelling is correct?</h2>
+                            <div class="options">
+                                <a data-option="Frontend" class="btn btn-default form-control input-block-level">Frontend</a>
+                                <a data-option="FrontEnd" class="btn btn-default form-control input-block-level">FrontEnd</a>
+                                <a data-option="Front-end" class="btn btn-default form-control input-block-level">Front-end</a>
+                                <a data-option="Front-End" class="btn btn-default form-control input-block-level">Front-End</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div data-question="q3" class="question">
+                            <h2>Q3: Select the most confusing thing in the past week:</h2>
+                            <div class="options">
+                                <a data-option="HTML" class="btn btn-default form-control input-block-level">HTML</a>
+                                <a data-option="CSS" class="btn btn-default form-control input-block-level">CSS</a>
+                                <a data-option="Javascript" class="btn btn-default form-control input-block-level">Javascript</a>
+                                <a data-option="eCharts" class="btn btn-default form-control input-block-level">eCharts</a>
+                                <a data-option="jQuery" class="btn btn-default form-control input-block-level">jQuery</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <h2>Thanks!</h2>
+                        <a id="submit" class="btn btn-default form-control input-block-level">Submit your result</a>
+                        <p style="display:none">Your feedback is well received.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Following line is equivelent of 
+        // $(function(){...})
+        $(document).ready(function() {
+
+            answers = {
+                q1: null,
+                q2: null,
+                q3: null
+            };
+
+            $('#fullpage').fullpage();
+
+            $('.question .options a').click(function() {
+                var me = $(this);
+                var option = me.data('option');
+                // The key function is closest() -- Find the first element matching the selector when traversing up the DOM tree.
+                var question = me.closest('.question').data('question');
+                answers[question] = option;
+                console.log(answers);
+
+                $.fn.fullpage.moveSectionDown();
+            })
+
+            var postData = function(url, data, callback) {
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: JSON.stringify(data),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: callback
+                })
+            }
+
+            $('#submit').click(function() {
+                var submitButton = $(this);
+                console.log(answers);
+                postData('http://localhost:3000/surveys/', answers, function() {
+                    console.log('done');
+                    var paragraph = submitButton.closest('.section').find('p');
+                    submitButton.fadeOut(500, function() {
+                        // fadeIn the paragrpah after button completely faded out.
+                        paragraph.fadeIn(500)
+                    });
+                })
+            })
+        });
+    </script>
+</body>

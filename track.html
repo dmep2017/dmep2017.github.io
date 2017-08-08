@@ -1,0 +1,108 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <title>Tracker</title>
+
+    <style>
+        .sub-window {
+            border-top: 3px dashed #b1aaaa;
+            padding-top: 5px;
+            overflow-y: scroll;
+        }
+        
+        .sub-window iframe {
+            height: 90%;
+        }
+        
+        .sub-window pre {
+            height: 90%;
+            word-wrap: normal;
+            white-space: pre;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Demo tracker</h1>
+            </div>
+            <div class="col-xs-6">
+                <div class="input-group">
+                    <input id="demoUrl" type="text" value="jquery/index.html" class="form-control">
+                    <span class="input-group-btn">
+                        <button id="update" class="btn">Update</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <h2>Result</h2>
+                <div class="sub-window">
+                    <iframe id="result" width="100%" src="index.html" frameborder="0"></iframe>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <h2>Code</h2>
+                <div class="sub-window">
+                    <pre id="code" width="100%"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function httpGetAsync(theUrl, callback) {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                    callback(xmlHttp.responseText);
+            }
+            xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+            xmlHttp.send(null);
+        }
+
+        function init() {
+            if (localStorage['demoUrl']) {
+                document.getElementById('demoUrl').value = localStorage['demoUrl'];
+            }
+            console.log($(window).height());
+            // $('#result').attr('height', $(window).height());
+            // $('#result').attr('max-height', $(window).height());
+            // $('#code').attr('height', $(window).height());
+            // $('#code').attr('max-height', $(window).height());
+            // $('.sub-window').attr('height', $(window).height());
+            // $('.sub-window').attr('max-height', $(window).height());
+            // $(window).width();
+        }
+
+        function refresh() {
+            var demoUrl = document.getElementById('demoUrl').value;
+            document.getElementById('result').src = demoUrl;
+            httpGetAsync(demoUrl, function(responseText) {
+                document.getElementById('code').innerText = responseText;
+            })
+            localStorage['demoUrl'] = demoUrl;
+            document.getElementById('result').scrollIntoView();
+        }
+
+        document.getElementById('update').onclick = function() {
+            refresh()
+        }
+
+        init();
+        refresh();
+    </script>
+
+</body>

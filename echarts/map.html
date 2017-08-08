@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- Use echarts.js -->
+    <script src="echarts.min.js"></script>
+    <!-- <script src="map-mainland-china.js"></script> -->
+    <script src="map-greater-china.js"></script>
+</head>
+
+<body>
+    <!-- Prepare the DOM element to be held by eCharts -->
+    <div id="mymap" style="width: 600px;height:400px;"></div>
+
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('mymap'));
+
+        option = {
+            "title": {
+                "text": "POI in each region",
+            },
+            "tooltip": {},
+            "visualMap": {
+                "min": 0,
+                "max": 15000,
+                "left": "left",
+                "top": "bottom",
+                "show": false,
+                "text": [
+                    "High",
+                    "Low"
+                ],
+                "calculable": true
+            },
+            "geo": {
+                "map": "china",
+                "roam": true,
+                "center": [
+                    114.31,
+                    30.52
+                ],
+                "zoom": 1,
+                "scaleLimit": {
+                    "min": 1,
+                    "max": 3
+                }
+            },
+            "series": [{
+                "name": "POI",
+                "type": "map",
+                "geoIndex": 0,
+                "data": [{
+                    "name": "福建",
+                    "value": 500
+                }, {
+                    "name": "广东",
+                    "value": 5000
+                }, {
+                    "name": "重庆",
+                    "value": 15000
+                }, {
+                    "name": "北京",
+                    "value": 15000
+                }]
+            }]
+        }
+
+        // 使用刚指定的配置项和数据显示图表。
+        // Following line is executed in 'map.js'
+        //echarts.registerMap('GeoJSON', geoJSON);
+        myChart.setOption(option);
+    </script>
+
+</body>
+
+</html>

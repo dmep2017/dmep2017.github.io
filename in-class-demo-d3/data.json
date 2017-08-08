@@ -1,0 +1,59 @@
+[
+    [{
+            "Country": "A",
+            "GDP": 30000,
+            "Life": 60,
+            "Population": 50
+        },
+        {
+            "Country": "B",
+            "GDP": 40000,
+            "Life": 20,
+            "Population": 100
+        },
+        {
+            "Country": "D",
+            "GDP": 10000,
+            "Life": 50,
+            "Population": 100
+        }
+    ],
+    [{
+            "Country": "A",
+            "GDP": 120000,
+            "Life": 50,
+            "Population": 50
+        },
+        {
+            "Country": "B",
+            "GDP": 50000,
+            "Life": 50,
+            "Population": 100
+        },
+        {
+            "Country": "C",
+            "GDP": 200000,
+            "Life": 80,
+            "Population": 100
+        }
+    ],
+    [{
+            "Country": "A",
+            "GDP": 120000,
+            "Life": 40,
+            "Population": 50
+        },
+        {
+            "Country": "B",
+            "GDP": 50000,
+            "Life": 30,
+            "Population": 100
+        },
+        {
+            "Country": "C",
+            "GDP": 200000,
+            "Life": 70,
+            "Population": 100
+        }
+    ]
+]

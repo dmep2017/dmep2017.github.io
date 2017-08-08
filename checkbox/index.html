@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Your health rating</h1>
+                <input data-score="10" type="checkbox"><label for="">Do you eat Apple? (+10)</label>
+                <br>
+                <input data-score="20" type="checkbox"><label for="">Do you exercise regularly? (+20)</label>
+                <br>
+                <input data-score="35" type="checkbox"><label for="">Are you happy (+35)</label>
+                <br>
+                <input data-score="50" type="checkbox"><label for="">Do you think you are health? (+50)</label>
+                <br>
+                <label for="">Your health score is:</label>
+                <br>
+                <button id="calculate">Calculate</button>
+                <input id="result" type="text">
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function() {
+            $('#calculate').click(function() {
+                var totalScore = 0;
+                $('input[type="checkbox"]').map(function() {
+                    var me = $(this);
+                    // Note works for jQuery 1.6+
+                    // Prior verions use me.attr('checked')
+                    if (me.prop('checked') == true) {
+                        totalScore = +totalScore + +me.data('score');
+                    }
+                });
+                $('#result').val(totalScore);
+            })
+        })
+    </script>
+</body>
+
+</html>

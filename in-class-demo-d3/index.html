@@ -1,0 +1,140 @@
+<html>
+
+<head>
+    <!-- <script src=""></script>
+        <link rel="stylesheet" href=""> -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+
+</head>
+
+<body>
+    <div id="chart">
+        <div>Title of the graph</div>
+        <svg width="300" height="200"></svg>
+    </div>
+    <script>
+        var svg = d3.select('#chart svg')
+            // svg
+            //     .append('circle')
+            //     .attr('cx', 50)
+            //     .attr('cy', 160)
+            //     .attr('r', 10)
+
+
+        var gdpScale = d3.scaleLinear()
+            .domain([0, 300000])
+            .range([0, 300])
+
+        var lifeScale = d3.scaleLinear()
+            .domain([0, 100])
+            .range([200, 0])
+
+        function updateChart(data) {
+            var circles = svg
+                .selectAll('circle')
+                .data(data, function(d, i) {
+                    return d['Country']
+                })
+
+            circles
+                .enter()
+                .append('circle')
+                .style('fill', 'rgba(200,200,0,0.6)')
+                .merge(circles)
+                .transition()
+                .attr('r', 10)
+                .attr('cx', function(d, i) {
+                    // console.log(d)
+                    // console.log(i)
+                    return gdpScale(d['GDP'])
+                })
+                .attr('cy', function(d, i) {
+                    // console.log(d)
+                    // console.log(i)
+                    return lifeScale(d['Life'])
+                })
+
+            circles
+                .exit()
+                .transition()
+                .style('fill', 'rgba(0,0,0,0)')
+                .on('end', function() {
+                    d3.select(this).remove()
+                })
+
+
+            var texts = svg
+                .selectAll('text')
+                .data(data, function(d, i) {
+                    return d['Country']
+                })
+
+            texts
+                .enter()
+                .append('text')
+                .text(function(d, i) {
+                    return d['Country']
+                })
+                .merge(texts)
+                .transition()
+                .attr('x', function(d, i) {
+                    return gdpScale(d['GDP'])
+                })
+                .attr('y', function(d, i) {
+                    return lifeScale(d['Life'])
+                })
+                .transition()
+
+            texts
+                .exit()
+                .transition()
+                .style('fill', 'rgba(0,0,0,0)')
+                .on('end', function() {
+                    d3.select(this).remove()
+                })
+
+            // svg.selectAll('circle')
+            //     .on('click', function() {
+            //         console.log('here');
+            //         d3.select(this).remove()
+            //     })
+
+            // svg.on('click', function() {
+            //     console.log('there');
+            //     svg.append('circle')
+            //         .attr('r', 20)
+            //         .attr('cx', d3.event.clientX)
+            //         .attr('cy', d3.event.clientY)
+            // })
+        }
+
+        d3.json('data.json', function(myData) {
+            // console.log(myData)
+            var yearIndex = 0
+                // updateChart(myData[yearIndex])
+            d3.interval(function() {
+                console.log(yearIndex)
+                updateChart(myData[yearIndex])
+                yearIndex = (yearIndex + 1) % myData.length
+            }, 1000)
+
+        })
+    </script>
+</body>
+
+</html>
+
+<!-- <svg width="300" height="200">
+            <circle r=20 cx=70 cy=170></circle>
+                      <circle r=20 cx=50 cy=50></circle>
+                                <circle r=20 cx=150 cy=150></circle>
+                                
+<g transform="rotate(-20)">
+            <rect width=150 height=20 x=10 y=80>
+            </rect>
+             <text y=120 x=20>
+                    My text
+             </text>
+</g>
+                
+        </svg> -->

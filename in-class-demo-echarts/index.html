@@ -1,0 +1,59 @@
+<html>
+
+<head>
+    <script src="echarts-master/dist/echarts.js"></script>
+</head>
+
+<body>
+    <p>Following is one chart:</p>
+    <div id="main" style="width:300px;height:300px"></div>
+    <script>
+        var myChart = echarts.init(document.getElementById('main'));
+
+        var option = {
+            "title": {
+                "text": "Population by gender",
+                "show": true,
+                "textStyle": {
+                    "color": "red",
+                }
+            },
+            "xAxis": [{
+                "type": "category",
+                "data": [
+                    'Year 1991',
+                    'Year 1996',
+                    2001
+                ],
+                "axisTick": {
+                    "alignWithLabel": true
+                }
+            }],
+            "yAxis": [{
+                "type": "value"
+            }],
+            "series": [{
+                "name": "Male",
+                "type": "line",
+                "data": [
+                    2811991,
+                    3108107,
+                    3285344
+                ],
+            }, {
+                "name": "Female",
+                "type": "bar",
+                "data": [
+                    2710290,
+                    3109449,
+                    3423045
+                ],
+                "barWidth": "10px",
+            }]
+        };
+
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

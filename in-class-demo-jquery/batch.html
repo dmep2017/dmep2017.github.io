@@ -1,0 +1,94 @@
+<html>
+
+<head>
+
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <style>
+        error {}
+        
+        correction {
+            display: none
+        }
+        
+        error.answer {
+            background: red;
+        }
+        
+        correction.answer {
+            background: green;
+            display: inline;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div>
+        <button class="hide-button">Fake Hide Button</button>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    This is
+                    <error>an</error>
+                    <correction>a</correction> paragraph.
+                </p>
+                <p>
+                    It contains
+                    <error>som</error>
+                    <correction>some</correction>
+                    <error>gramma</error>
+                    <correction>syntax</correction> errors.
+                </p>
+                <myshowbutton class="">Show</myshowbutton>
+                <button class="hide-button">Hide</button>
+                <button class="btn" id="toggle">Toggle</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function() {
+            // anything here
+            var showAnswer = function() {
+                $('error').addClass('answer');
+                $('correction').addClass('answer');
+            }
+            var hideAnswer = function() {
+                $('error').removeClass('answer');
+                $('correction').removeClass('answer');
+            }
+
+            var isAnswerShown = false;
+            var toggleAnswer = function() {
+                if (isAnswerShown) {
+                    hideAnswer();
+                    isAnswerShown = false;
+                } else {
+                    showAnswer();
+                    isAnswerShown = true;
+                }
+            }
+
+            $('myshowbutton').click(showAnswer);
+            $('div div div .hide-button').click(hideAnswer);
+            $('#toggle').click(toggleAnswer);
+        })
+    </script>
+
+</body>
+
+</html>

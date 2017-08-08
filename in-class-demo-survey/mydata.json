@@ -1,0 +1,46 @@
+{
+  "answers": [
+    {
+      "q1": "Yes",
+      "q2": "Frontend",
+      "id": 1
+    },
+    {
+      "q1": "No",
+      "q2": "Front-end",
+      "id": 2
+    },
+    {
+      "q1": "No",
+      "q2": "Frontend",
+      "id": 3
+    },
+    {
+      "q1": "Yes",
+      "q2": "Front-End",
+      "id": 4
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": 2,
+      "title": "class demo",
+      "author": "Pili"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

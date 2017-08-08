@@ -1,0 +1,52 @@
+<html>
+
+<head></head>
+
+<body>
+
+    <h2>Click Event</h2>
+
+    <div>
+        <p>Use the "onclick" attribute of an HTML tag to bind the "click" event</p>
+        <button onclick="alert('Button!')">Click me</button>
+    </div>
+    <div>
+        <p>A tag is clickable by default. You can use href to run JS code</p>
+        <a href="javascript:alert('Anchor clicked!')">Click me</a>
+    </div>
+    <div>
+        <p>You can also set the "onclick" property using JS</p>
+        <span id="clickable-span">Click me</span>
+        <script>
+            document.getElementById('clickable-span').onclick = function() {
+                alert('Span clicked!');
+            }
+        </script>
+    </div>
+    <div>
+        <p>Or more verbosely, use "AddEventListener" method</p>
+        <mytag>Click me</mytag>
+        <script>
+            document.getElementsByTagName('mytag')[0].addEventListener('click', function() {
+                alert('Mytag clicked!');
+            })
+        </script>
+    </div>
+
+    <h2>Change event</h2>
+    <p>We copy everything from the left input box to the right input box</p>
+    <input id="input1" type="text">
+    <input id="input2" type="text">
+    <script>
+        // // See what happens with the following alernatives 
+        // document.getElementById('input1').onchange = function() {
+        // document.getElementById('input1').onkeydown = function() {
+        // document.getElementById('input1').onkeypress = function() {
+        document.getElementById('input1').onkeyup = function() {
+            console.log(document.getElementById('input1').value)
+            document.getElementById('input2').value = document.getElementById('input1').value
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script src="d3.v4.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="data/all_data.js"></script>
+
+    <title></title>
+
+</head>
+
+<body>
+
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <h1>D3 Demo</h1>
+                    <div id="chart" style="width:300px;height:300px;border:1px dashed lightgrey">
+                        <svg width="100%" height="100%">
+                            <g id="data"> </g>
+                            <g id="meta"> 
+                                <text id="caption">Year</text> 
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var data = [{
+            country: 'A',
+            GDP: 200,
+            Population: 100
+        }, {
+            country: 'B',
+            GDP: 50,
+            Population: 50
+        }, {
+            country: 'C',
+            GDP: 150,
+            Population: 10
+        }];
+
+        var data2 = [{
+            country: 'A',
+            GDP: 50,
+            Population: 80
+        }, {
+            country: 'D',
+            GDP: 250,
+            Population: 100
+        }, {
+            country: 'C',
+            GDP: 150,
+            Population: 120
+        }];
+
+
+        var svg = d3.select('#chart svg');
+        var dataGroup = svg.select('g#data');
+        var metaGroup = svg.select('g#meta');
+        // svg.append('circle').attr('cx', 100).attr('cy', 100).attr('r', 10).style('fill', 'black');
+        // var updateDataPoints = svg.data(data, function(d) {
+        //     return d.country
+        // });
+
+        var keyFunc = function(d) {
+            return d[0];
+        }
+
+        var margin = {
+            top: 20,
+            right: 10,
+            bottom: 50,
+            left: 20
+        }
+        var height = $('svg').height();
+        var width = $('svg').width();
+        var minBubbleSize = 2;
+        var maxBubbleSize = 20;
+
+        var gdpScale = d3.scaleLinear()
+            .domain(gdpDomain)
+            .range([0 + margin.left, width - margin.right])
+
+        var lifeScale = d3.scaleLinear()
+            .domain(lifeDomain)
+            .range([height - margin.bottom, 0 + margin.top])
+
+        var populationScale = d3.scaleLog()
+            .domain(populationDomain)
+            .range([minBubbleSize, maxBubbleSize])
+
+        var xAxis = d3.axisBottom()
+            .scale(gdpScale)
+
+        var yAxis = d3.axisLeft()
+            .scale(lifeScale)
+
+        function update(data) {
+            var circles = dataGroup.selectAll('circle').data(data, keyFunc)
+            circles
+                .enter()
+                .append('circle')
+                .attr('r', 10)
+                .style('fill', 'rgba(100,100,100,0.2)')
+                .merge(circles)
+                .transition()
+                .attr('cx', function(d, i) {
+                    return gdpScale(d[1]['gdp_pc'])
+                })
+                .attr('cy', function(d, i) {
+                    return lifeScale(d[1]['life'])
+                })
+                .attr('r', function(d, i) {
+                    return populationScale(d[1]['population'])
+                })
+
+            circles
+                .exit()
+                .transition()
+                .style('fill', 'rgba(100,100,100,0.0)')
+                .on('end', function() {
+                    d3.select(this).remove()
+                })
+
+            var texts = dataGroup.selectAll('text').data(data, keyFunc)
+            texts
+                .enter()
+                .append('text')
+                .attr('dy', '0.35em')
+                .attr('dx', '0.75em')
+                .style('fill', 'rgba(100,100,100,0.5)')
+                .merge(texts)
+                .transition()
+                .text(function(d) {
+                    return d[0]
+                })
+                .attr('x', function(d) {
+                    return gdpScale(d[1]['gdp_pc'])
+                })
+                .attr('y', function(d) {
+                    return lifeScale(d[1]['life'])
+                })
+            texts
+                .exit()
+                .transition()
+                .style('fill', 'rgba(100,100,100,0.0)')
+                .on('end', function() {
+                    d3.select(this).remove()
+                })
+        }
+
+        var yearIndex = 0;
+        var dataOfTheYear = allData[yearIndex][1];
+        var yearName = allData[yearIndex][0];
+
+        metaGroup.append('g')
+            .attr('transform', 'translate(0, ' + (height - margin.bottom) + ')')
+            .call(xAxis)
+            .selectAll("text")
+            .attr("y", 0)
+            .attr("x", 9)
+            .attr("dy", ".35em")
+            .attr("transform", "rotate(90)")
+            .style("text-anchor", "start");
+
+        metaGroup.append('g')
+            .attr('transform', 'translate(' + margin.left + ', 0)')
+            .call(yAxis)
+
+        update(dataOfTheYear);
+
+        // window.setTimeout(function() {
+        //     update(data2)
+        // }, 2000)
+
+        d3.interval(function() {
+            yearIndex = (yearIndex + 1) % allData.length;
+            var dataOfTheYear = allData[yearIndex][1];
+            var yearName = allData[yearIndex][0];
+            update(dataOfTheYear);
+            metaGroup.select('#caption')
+                .text(yearName)
+                .attr('x', width / 2)
+                .attr('y', margin.top)
+        }, 500)
+    </script>
+
+</body>

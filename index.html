@@ -2,29 +2,83 @@
 
 <head>
     <title>DMEP CLass Materials</title>
+
+    <style>
+        h2 {
+            text-align: center;
+        }
+        
+        #course-information {
+            color: red;
+        }
+        
+        .my-heading {
+            font-weight: 100;
+        }
+        
+        ul li {
+            background-color: antiquewhite;
+        }
+    </style>
+
 </head>
 
 <body>
 
-    <h1>DMEP Class</h1>
+    <h1 style="color: green;
+    font-size: 70px;
+    font-family: sans-serif;
+    font-weight: 900;">DMEP Class</h1>
 
-    <h2>Course Information</h2>
+    <h2 id="course-information">Course Information
+    </h2>
 
-    <ul>
-        <li>Time: July 31 - Aug 12</li>
-        <li>Venue: HSBC Biz School 415</li>
-        <li>Lectuer: Pili Hu</li>
-    </ul>
+    <div>
+        <ul class="fancy-list">
+            <li>Time: July 31 - Aug 12</li>
+            <li>Venue: HSBC Biz School 415</li>
+            <li>Lectuer: Pili Hu</li>
+        </ul>
+    </div>
 
-    <h2>Slides</h2>
+    <h2 class="my-heading">Slides</h2>
 
     <a href="https://docs.google.com/presentation/d/1BE959TyjkuupOdOximVH26BGBUvZqKDWpJFd5xCbwI0/edit#slide=id.p">Day 1</a>
 
-    <iframe src="https://docs.google.com/presentation/d/1BE959TyjkuupOdOximVH26BGBUvZqKDWpJFd5xCbwI0/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+    <!-- This is comment -->
 
-    <h2>Student List</h2>
+    <style>
+        .embed-container {
+            position: relative;
+            padding-bottom: 78%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        
+        .embed-container iframe,
+        .embed-container object,
+        .embed-container embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <div class='embed-container'> <iframe src='https://docs.google.com/presentation/d/1BE959TyjkuupOdOximVH26BGBUvZqKDWpJFd5xCbwI0/embed?start=false&loop=false&delayms=3000' frameborder='0' width='960' height='749' allowfullscreen='true' mozallowfullscreen='true' webkitallowfullscreen='true'></iframe></div>
 
-    <h2>Reference</h2>
+    <!-- <iframe src="https://docs.google.com/presentation/d/1BE959TyjkuupOdOximVH26BGBUvZqKDWpJFd5xCbwI0/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe> -->
+
+
+    <h2 class="my-heading">Student List</h2>
+
+    <h2 class="my-heading">Reference</h2>
+
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+    </ul>
 
 </body>
 

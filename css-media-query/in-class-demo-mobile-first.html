@@ -1,0 +1,60 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        div {
+            background-color: goldenrod;
+            margin-top: 1em;
+            height: 50px;
+        }
+        
+        #main {
+            height: 150px;
+        }
+        
+        @media (min-width: 760px) {
+            #main,
+            #ads {
+                height: 200px;
+                display: inline-block;
+            }
+            #main {
+                width: 80%;
+            }
+            #ads {
+                width: 15%;
+            }
+        }
+        
+        @media (min-width: 1000px) {
+            #main {
+                width: 60%;
+            }
+            #sidebar {
+                display: inline-block;
+                height: 200px;
+                width: 20%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <picture>
+        <source srcset="icon.png" media="(max-width: 700px)">
+        <source srcset="code.png">
+        <img src="code.png" alt="Flowers" style="width:auto;">
+    </picture>
+
+    <div id="header" style="background-color:red"> header
+    </div>
+    <div id="ads" style="background-color:green">Ads</div>
+    <div id="main" style="background-color:blue">main</div>
+    <div id="sidebar" style="background-color:grey">sidebar</div>
+    <div id="footer">footer</div>
+</body>
+
+</html>
