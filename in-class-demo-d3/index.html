@@ -9,8 +9,57 @@
 
 <body>
     <div id="chart">
-        <svg width="300" height="200">
-            <circle r=20 cx=50 cy=150></circle>
+        <svg width="300" height="200"></svg>
+    </div>
+    <script>
+        var svg = d3.select('#chart svg')
+            // svg
+            //     .append('circle')
+            //     .attr('cx', 50)
+            //     .attr('cy', 160)
+            //     .attr('r', 10)
+        var data = [{
+            Country: 'A',
+            GDP: 120,
+            Life: 50,
+            Population: 50
+        }, {
+            Country: 'B',
+            GDP: 50,
+            Life: 50,
+            Population: 100
+        }, {
+            Country: 'C',
+            GDP: 200,
+            Life: 80,
+            Population: 100
+        }];
+
+        var circles = svg
+            .selectAll('circle')
+            .data(data)
+
+        circles
+            .enter()
+            .append('circle')
+            .attr('r', 10)
+            .attr('cx', function(d, i) {
+                // console.log(d)
+                // console.log(i)
+                return d['GDP']
+            })
+            .attr('cy', function(d, i) {
+                // console.log(d)
+                // console.log(i)
+                return d['Life']
+            })
+    </script>
+</body>
+
+</html>
+
+<!-- <svg width="300" height="200">
+            <circle r=20 cx=70 cy=170></circle>
                       <circle r=20 cx=50 cy=50></circle>
                                 <circle r=20 cx=150 cy=150></circle>
                                 
@@ -22,8 +71,4 @@
              </text>
 </g>
                 
-        </svg>
-    </div>
-</body>
-
-</html>
+        </svg> -->
