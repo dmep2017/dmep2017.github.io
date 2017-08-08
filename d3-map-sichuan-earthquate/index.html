@@ -134,7 +134,7 @@
                         return projection(d.geometry.coordinates)[1]
                     })
             }
-            idea1()
+
 
             function idea2() {
                 var svg = createSVG();
@@ -164,7 +164,7 @@
                         return projection(d.geometry.coordinates)[1]
                     })
             }
-            idea2()
+
 
             function idea3() {
                 var svg = createSVG();
@@ -200,7 +200,6 @@
                         return projection(d.geometry.coordinates)[1]
                     })
             }
-            idea3()
 
             function idea4() {
                 var svg = createSVG();
@@ -276,8 +275,11 @@
                     yearIndex = (yearIndex + 1) % earthquakeByYear.length;
                 }, 200)
             }
-            idea4()
 
+            idea4()
+            idea1()
+            idea2()
+            idea3()
         }
 
         q.awaitAll(ready)
