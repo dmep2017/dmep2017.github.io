@@ -1,0 +1,914 @@
+{
+  "title": {
+    "text": "國台辦掛牌「海峽兩岸青年創業基地」分佈統計",
+    "textStyle": {
+      "color": "#fff",
+      "fontSize": 18
+    }
+  },
+  "backgroundColor": "#495397",
+  "tooltip": {
+  },
+  "legend": {
+    "orient": "vertical",
+    "right": 20,
+    "bottom": 20,
+    "selectedMode": "multiple",
+    "selected": {
+      "第一期 (2015/6/18)": true,
+      "第二期 (2015/10/15)": false,
+      "第三期 (2015/12/22)": false,
+      "第四期 (2016/8/18)": false
+    },
+    "textStyle": {
+      "color": "#68acea"
+    },
+    "data": [
+      "第一期 (2015/6/18)",
+      "第二期 (2015/10/15)",
+      "第三期 (2015/12/22)",
+      "第四期 (2016/8/18)"
+    ]
+  },
+  "visualMap": {
+    "min": 0,
+    "max": 5000,
+    "left": "left",
+    "top": "bottom",
+    "show": false,
+    "text": [
+      "High",
+      "Low"
+    ],
+    "seriesIndex": [
+      1
+    ],
+    "inRange": {
+      "color": [
+        "#5b5b5b",
+        "#68acea"
+      ]
+    },
+    "calculable": true
+  },
+  "geo": {
+    "map": "GeoJSON",
+    "roam": true,
+    "center": [
+      114.31,
+      30.52
+    ],
+    "zoom": 2,
+    "scaleLimit": {
+      "min": 1,
+      "max": 3
+    },
+    "label": {
+      "normal": {
+        "show": false
+      },
+      "emphasis": {
+        "show": false
+      }
+    },
+    "itemStyle": {
+      "normal": {
+        "color": "#5b5b5b",
+        "borderColor": "rgba(255, 255, 255, .5)"
+      },
+      "emphasis": {
+        "color": "#7d7d7d"
+      }
+    }
+  },
+  "series": [
+    {
+      "name": "第一期 (2015/6/18)",
+      "type": "scatter",
+      "legendHoverLink": false,
+      "tooltip": {
+        "backgroundColor": "#f1521a",
+        "textStyle": {
+          "color": "#000"
+        },
+        "confine": true,
+        "formatter": "{b}"
+      },
+      "coordinateSystem": "geo",
+      "data": [
+        {
+          "name": "廣東省深圳市福田保稅區 廣東深圳中芬設計園",
+          "value": [
+            114.07,
+            22.62,
+            12
+          ]
+        }
+      ],
+      "symbolSize": 7,
+      "symbol": "circle",
+      "symbolRotate": 10,
+      "label": {
+        "normal": {
+          "formatter": "{b}",
+          "position": "right",
+          "show": false
+        },
+        "emphasis": {
+          "show": false
+        }
+      },
+      "itemStyle": {
+        "normal": {
+          "color": "#f1521a"
+        }
+      }
+    },
+    {
+      "name": "categoryA",
+      "type": "map",
+      "tooltip": {
+        "show": false
+      },
+      "geoIndex": 0,
+      "roam": true,
+      "selectedMode": "multiple",
+      "label": {
+        "normal": {
+          "show": true
+        },
+        "emphasis": {
+          "show": true
+        }
+      },
+      "data": [
+        {
+          "name": "北京",
+          "value": 0
+        },
+        {
+          "name": "天津",
+          "value": 0
+        },
+        {
+          "name": "上海",
+          "value": 0
+        },
+        {
+          "name": "重庆",
+          "value": 0
+        },
+        {
+          "name": "河北",
+          "value": 0
+        },
+        {
+          "name": "河南",
+          "value": 0
+        },
+        {
+          "name": "云南",
+          "value": 0
+        },
+        {
+          "name": "辽宁",
+          "value": 0
+        },
+        {
+          "name": "黑龙江",
+          "value": 0
+        },
+        {
+          "name": "湖南",
+          "value": 0
+        },
+        {
+          "name": "安徽",
+          "value": 0
+        },
+        {
+          "name": "山东",
+          "value": 0
+        },
+        {
+          "name": "新疆",
+          "value": 0
+        },
+        {
+          "name": "江苏",
+          "value": 0
+        },
+        {
+          "name": "浙江",
+          "value": 0
+        },
+        {
+          "name": "江西",
+          "value": 0
+        },
+        {
+          "name": "湖北",
+          "value": 0
+        },
+        {
+          "name": "广西",
+          "value": 0
+        },
+        {
+          "name": "甘肃",
+          "value": 0
+        },
+        {
+          "name": "山西",
+          "value": 0
+        },
+        {
+          "name": "内蒙古",
+          "value": 0
+        },
+        {
+          "name": "陕西",
+          "value": 0
+        },
+        {
+          "name": "吉林",
+          "value": 0
+        },
+        {
+          "name": "福建",
+          "value": 0
+        },
+        {
+          "name": "贵州",
+          "value": 0
+        },
+        {
+          "name": "广东",
+          "value": 0
+        },
+        {
+          "name": "青海",
+          "value": 0
+        },
+        {
+          "name": "西藏",
+          "value": 0
+        },
+        {
+          "name": "四川",
+          "value": 0
+        },
+        {
+          "name": "宁夏",
+          "value": 0
+        },
+        {
+          "name": "海南",
+          "value": 0
+        },
+        {
+          "name": "台湾",
+          "value": 0
+        },
+        {
+          "name": "香港",
+          "value": 0
+        },
+        {
+          "name": "澳门",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "第一期 (2015/6/18)",
+      "type": "map",
+      "geoIndex": 0,
+      "data": [
+        {
+          "name": "广东",
+          "value": 5000
+        }
+      ]
+    },
+    {
+      "name": "第二期 (2015/10/15)",
+      "type": "scatter",
+      "legendHoverLink": false,
+      "tooltip": {
+        "backgroundColor": "#f48664",
+        "textStyle": {
+          "color": "#000"
+        },
+        "confine": true,
+        "formatter": "{b}"
+      },
+      "coordinateSystem": "geo",
+      "data": [
+        {
+          "name": "北京市海澱區 北京中關村創業大街",
+          "value": [
+            116.46,
+            39.92,
+            12
+          ]
+        },
+        {
+          "name": "上海市西南 上海市金山工業區",
+          "value": [
+            121.48,
+            31.22,
+            240
+          ]
+        },
+        {
+          "name": "上海市金山區 上海和輝光電有限公司",
+          "value": [
+            121.2,
+            30.8,
+            240
+          ]
+        },
+        {
+          "name": "江蘇省南京市 麒麟兩岸中小企業創新園",
+          "value": [
+            119.2,
+            32.04,
+            12
+          ]
+        },
+        {
+          "name": "江蘇省昆山市陽澄湖科技園核心區 昆山兩岸青年創業園",
+          "value": [
+            120.3,
+            31.5,
+            12
+          ]
+        },
+        {
+          "name": "浙江省溫州市 浙江溫州臺灣青年創業就業服務中心",
+          "value": [
+            120.65,
+            28.01,
+            12
+          ]
+        },
+        {
+          "name": "浙江省杭州市 浙江杭州雲棲小鎮",
+          "value": [
+            120.19,
+            30.26,
+            12
+          ]
+        },
+        {
+          "name": "福建省福州市 福建福州海峽創意產業園",
+          "value": [
+            119.3,
+            26.08,
+            12
+          ]
+        },
+        {
+          "name": "福建省廈門市 福建省福州市福建廈門兩岸青年創業創新創客基地",
+          "value": [
+            118.1,
+            24.46,
+            240
+          ]
+        },
+        {
+          "name": "福建省廈門市 福建廈門一品威客創客空間",
+          "value": [
+            118,
+            24,
+            240
+          ]
+        },
+        {
+          "name": "湖北省武漢市 湖北東西湖區臺灣青年創業基地",
+          "value": [
+            114.31,
+            30.52,
+            12
+          ]
+        },
+        {
+          "name": "廣東省東莞市 廣東東莞松山湖（生態園）臺灣高科技園",
+          "value": [
+            113.75,
+            23.04,
+            12
+          ]
+        }
+      ],
+      "symbolSize": 7,
+      "symbol": "circle",
+      "symbolRotate": 10,
+      "label": {
+        "normal": {
+          "formatter": "{b}",
+          "position": "right",
+          "show": false
+        },
+        "emphasis": {
+          "show": false
+        }
+      },
+      "itemStyle": {
+        "normal": {
+          "color": "#f48664"
+        }
+      }
+    },
+    {
+      "name": "第二期 (2015/10/15)",
+      "type": "map",
+      "geoIndex": 0,
+      "data": [
+        {
+          "name": "广东",
+          "value": 5000
+        },
+        {
+          "name": "上海",
+          "value": 5000
+        },
+        {
+          "name": "浙江",
+          "value": 5000
+        },
+        {
+          "name": "北京",
+          "value": 5000
+        },
+        {
+          "name": "湖北",
+          "value": 5000
+        },
+        {
+          "name": "福建",
+          "value": 5000
+        },
+        {
+          "name": "江苏",
+          "value": 5000
+        }
+      ]
+    },
+    {
+      "name": "第三期 (2015/12/22)",
+      "type": "scatter",
+      "legendHoverLink": false,
+      "tooltip": {
+        "backgroundColor": "#f2bfb1",
+        "textStyle": {
+          "color": "#000"
+        },
+        "confine": true,
+        "formatter": "{b}"
+      },
+      "coordinateSystem": "geo",
+      "data": [
+        {
+          "name": "江蘇省昆山市 江蘇省昆山市臺協微創業基地",
+          "value": [
+            120.95,
+            31.8,
+            12
+          ]
+        },
+        {
+          "name": "北京市海澱區中關村 北京市遠見育成孵化器有限公司",
+          "value": [
+            116,
+            39.5,
+            12
+          ]
+        },
+        {
+          "name": "北京市朝陽區 聯發科技股份有限公司",
+          "value": [
+            117,
+            40,
+            12
+          ]
+        },
+        {
+          "name": "北京市海澱區 威盛電子（中國）有限公司",
+          "value": [
+            115.7,
+            40,
+            12
+          ]
+        },
+        {
+          "name": "上海市 上海市慧高光創園",
+          "value": [
+            121.48,
+            31,
+            12
+          ]
+        },
+        {
+          "name": "江蘇省昆山市 研華科技協同創新研發中心",
+          "value": [
+            120,
+            31.39,
+            12
+          ]
+        },
+        {
+          "name": "江蘇省昆山市 昆山龍騰光電有限公司",
+          "value": [
+            120.95,
+            31.39,
+            12
+          ]
+        },
+        {
+          "name": "福建省廈門市 宸鴻科技（廈門）有限公司",
+          "value": [
+            117.5,
+            24.46,
+            12
+          ]
+        },
+        {
+          "name": "上海市 上海市臺灣同胞投資企業協會（示範點）",
+          "value": [
+            121.9,
+            31,
+            12
+          ]
+        }
+      ],
+      "symbolSize": 7,
+      "symbol": "circle",
+      "symbolRotate": 10,
+      "label": {
+        "normal": {
+          "formatter": "{b}",
+          "position": "right",
+          "show": false
+        },
+        "emphasis": {
+          "show": false
+        }
+      },
+      "itemStyle": {
+        "normal": {
+          "color": "#f2bfb1"
+        }
+      }
+    },
+    {
+      "name": "第三期 (2015/12/22)",
+      "type": "map",
+      "geoIndex": 0,
+      "data": [
+        {
+          "name": "北京",
+          "value": 5000
+        },
+        {
+          "name": "江苏",
+          "value": 5000
+        },
+        {
+          "name": "上海",
+          "value": 5000
+        },
+        {
+          "name": "福建",
+          "value": 5000
+        }
+      ]
+    },
+    {
+      "name": "第四期 (2016/8/18)",
+      "type": "scatter",
+      "legendHoverLink": false,
+      "tooltip": {
+        "backgroundColor": "#fff1ee",
+        "textStyle": {
+          "color": "#000"
+        },
+        "confine": true,
+        "formatter": "{b}"
+      },
+      "coordinateSystem": "geo",
+      "data": [
+        {
+          "name": "北京市 北京啟迪創業孵化器有限公司",
+          "value": [
+            117,
+            40.3,
+            12
+          ]
+        },
+        {
+          "name": "遼寧省瀋陽市 瀋陽市三好街兩岸青年創業園",
+          "value": [
+            123.38,
+            41.8,
+            12
+          ]
+        },
+        {
+          "name": "上海市閔行區 上海虹橋889創客空間",
+          "value": [
+            122,
+            31.22,
+            12
+          ]
+        },
+        {
+          "name": "上海市閔行區 臺青創客家",
+          "value": [
+            121.48,
+            30.7,
+            12
+          ]
+        },
+        {
+          "name": "江蘇省南京市 南京海峽兩岸科技工業園眾創碼頭",
+          "value": [
+            118.78,
+            32.04,
+            12
+          ]
+        },
+        {
+          "name": "江蘇省蘇州市昆山市 昆山百富創客花園",
+          "value": [
+            121.2,
+            31.39,
+            12
+          ]
+        },
+        {
+          "name": "江蘇省蘇州市 蘇州兩岸青年創業園",
+          "value": [
+            120.62,
+            30.9,
+            12
+          ]
+        },
+        {
+          "name": "浙江省寧波市 寧波創新創業園",
+          "value": [
+            121.56,
+            29.86,
+            12
+          ]
+        },
+        {
+          "name": "浙江省義烏市 義烏科創新區",
+          "value": [
+            120.06,
+            29.32,
+            12
+          ]
+        },
+        {
+          "name": "浙江省杭州市 杭州智新澤地-浙江網際網路產業園",
+          "value": [
+            120.8,
+            30.26,
+            12
+          ]
+        },
+        {
+          "name": "安徽省合肥市 合肥新站高新技術產業開發區",
+          "value": [
+            117.27,
+            31.86,
+            12
+          ]
+        },
+        {
+          "name": "福建省福州市 福州海峽兩岸青年創業孵化中心",
+          "value": [
+            119.3,
+            26.6,
+            12
+          ]
+        },
+        {
+          "name": "福建省福州市平潭縣 平潭臺灣創業園",
+          "value": [
+            119.8,
+            25.5,
+            12
+          ]
+        },
+        {
+          "name": "山東省濟南市 濟南新材料產業園",
+          "value": [
+            117,
+            36.65,
+            12
+          ]
+        },
+        {
+          "name": "山東省青島市 青島市大學生創業孵化中心",
+          "value": [
+            120.33,
+            36.07,
+            12
+          ]
+        },
+        {
+          "name": "廣東省廣州市 廣州匯龍信息產業科技園",
+          "value": [
+            113.23,
+            23.16,
+            12
+          ]
+        },
+        {
+          "name": "廣東省惠州市 惠州仲愷高新區",
+          "value": [
+            114.4,
+            23.09,
+            12
+          ]
+        },
+        {
+          "name": "廣東省深圳市 賽格創客空間",
+          "value": [
+            114.47,
+            22.62,
+            12
+          ]
+        },
+        {
+          "name": "四川省德陽市 德陽市臺灣青年創業園",
+          "value": [
+            104.37,
+            31.13,
+            12
+          ]
+        },
+        {
+          "name": "北京市 北京大學新媒體行銷傳播（CCM）研究中心(示範點)",
+          "value": [
+            116.46,
+            40.8,
+            12
+          ]
+        },
+        {
+          "name": "北京市 北京創業公社投資發展有限公司(示範點)",
+          "value": [
+            116.46,
+            40.3,
+            12
+          ]
+        },
+        {
+          "name": "天津市 101兩岸創客MOHO(示範點)",
+          "value": [
+            117.4219,
+            39.4189,
+            12
+          ]
+        },
+        {
+          "name": "江蘇省蘇州市 中達電子(江蘇)有限公司(示範點)",
+          "value": [
+            120.62,
+            31.32,
+            12
+          ]
+        },
+        {
+          "name": "浙江省麗水市 麗水江泰國際星城(示範點)",
+          "value": [
+            119.92,
+            28.45,
+            12
+          ]
+        },
+        {
+          "name": "江蘇省淮安市 淮安臺商學院（示範點）",
+          "value": [
+            119.15,
+            33.5,
+            12
+          ]
+        },
+        {
+          "name": "浙江省永康市 宣城鷹鵬集團(示範點)",
+          "value": [
+            119.64,
+            29.12,
+            12
+          ]
+        },
+        {
+          "name": "福建省南安市 泉州福建閩南農產品市場(示範點)",
+          "value": [
+            118.58,
+            24.93,
+            12
+          ]
+        },
+        {
+          "name": "湖北省武漢市 湖北經濟學院(示範點)",
+          "value": [
+            114.31,
+            29.9,
+            12
+          ]
+        },
+        {
+          "name": "廣東省廣州市 廣州光機電技術研究院(示範點)",
+          "value": [
+            112.7,
+            23.16,
+            12
+          ]
+        },
+        {
+          "name": "廣東省東莞市 901兩岸青創聯盟虛擬孵化器（示範點）",
+          "value": [
+            113.75,
+            23.6,
+            12
+          ]
+        }
+      ],
+      "symbolSize": 7,
+      "symbol": "circle",
+      "symbolRotate": 10,
+      "label": {
+        "normal": {
+          "formatter": "{b}",
+          "position": "right",
+          "show": false
+        },
+        "emphasis": {
+          "show": false
+        }
+      },
+      "itemStyle": {
+        "normal": {
+          "color": "#fff1ee"
+        }
+      }
+    },
+    {
+      "name": "第四期 (2016/8/18)",
+      "type": "map",
+      "geoIndex": 0,
+      "data": [
+        {
+          "name": "北京",
+          "value": 5000
+        },
+        {
+          "name": "辽宁",
+          "value": 5000
+        },
+        {
+          "name": "上海",
+          "value": 5000
+        },
+        {
+          "name": "浙江",
+          "value": 5000
+        },
+        {
+          "name": "安徽",
+          "value": 5000
+        },
+        {
+          "name": "福建",
+          "value": 5000
+        },
+        {
+          "name": "山东",
+          "value": 5000
+        },
+        {
+          "name": "广东",
+          "value": 5000
+        },
+        {
+          "name": "湖北",
+          "value": 5000
+        },
+        {
+          "name": "四川",
+          "value": 5000
+        },
+        {
+          "name": "江苏",
+          "value": 5000
+        }
+      ]
+    }
+  ]
+}
