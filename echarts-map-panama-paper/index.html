@@ -18,10 +18,13 @@
 
         // 指定图表的配置项和数据
 
+        // Data source: http://initiumlab.com/blog/20160529-panama-papers-on-map/
+        // Code generation for data points: https://docs.google.com/spreadsheets/d/1nr-PetFqMLMdCjoaiofm5lo6W4DCrmqI4pLztEH_fCU/edit#gid=0
+
         option = {
             title: {
-                text: 'Panama Papers in China',
-                subtext: 'Data from ICIJ',
+                text: 'Intermediaries in China',
+                subtext: 'Data from ICIJ "Panama Papers"',
                 left: 'center'
             },
             tooltip: {
@@ -30,7 +33,7 @@
             legend: {
                 orient: 'vertical',
                 left: 'left',
-                data: ['Intermediaries']
+                data: ['Intermediaries', 'BaseMap']
             },
             visualMap: {
                 min: 1,
@@ -54,9 +57,24 @@
                 }
             },
             series: [{
-                name: 'Panama Paper',
+                name: 'BaseMap',
                 type: 'map',
-                mapType: 'china',
+                map: 'china',
+                roam: false,
+                roam: false,
+                label: {
+                    normal: {
+                        show: true
+                    },
+                    emphasis: {
+                        show: true
+                    }
+                },
+                data: []
+            }, {
+                name: 'Intermediaries',
+                type: 'map',
+                map: 'china',
                 roam: false,
                 label: {
                     normal: {
