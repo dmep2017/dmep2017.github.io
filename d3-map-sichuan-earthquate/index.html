@@ -42,14 +42,20 @@
         var width = 540;
         var height = 420;
 
+        var scaleMagnitude = function(m) {
+            // https://en.wikipedia.org/wiki/Richter_magnitude_scale
+            // normalise Ritcher 5 to unit 1
+            return Math.sqrt(Math.pow((Math.sqrt(1000)), (m - 5)))
+        }
+
         d3.json('si_chuan_geo.json', function(sichuan) {
 
             var centroid = d3.geoCentroid(sichuan)
-            var projection = d3.geoMercator()
+            projection = d3.geoMercator()
                 .scale(2000)
                 .center(centroid) // Shoule be [103.43787044517553, 36.57208235863611]
                 .translate([width / 2, height / 2])
-            var geoPath = d3
+            geoPath = d3
                 .geoPath()
                 .projection(projection)
 
@@ -60,6 +66,26 @@
                 .attr('stroke', '#000')
                 .attr('fill', '#eeeeee')
                 .attr('d', geoPath)
+
+            d3.json('earthquake.geo.json', function(earthquake) {
+                svg.selectAll('circle')
+                    .data(earthquake.features)
+                    .enter()
+                    .append('circle')
+                    .attr('r', function(d, i) {
+                        return scaleMagnitude(d.properties.mag) / 1
+                    })
+                    .attr('fill', 'rgba(200, 100, 150, 0.2)')
+                    .attr('cx', function(d) {
+                        // console.log(d)
+                        return projection(d.geometry.coordinates)[0]
+                    })
+                    .attr('cy', function(d) {
+                        // console.log(d)
+                        return projection(d.geometry.coordinates)[1]
+                    })
+            })
+
         })
     </script>
 
