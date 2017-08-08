@@ -19,56 +19,15 @@
             //     .attr('cx', 50)
             //     .attr('cy', 160)
             //     .attr('r', 10)
-        var data = [
-            [{
-                Country: 'A',
-                GDP: 30,
-                Life: 30,
-                Population: 50
-            }, {
-                Country: 'B',
-                GDP: 40,
-                Life: 20,
-                Population: 100
-            }, {
-                Country: 'D',
-                GDP: 10,
-                Life: 50,
-                Population: 100
-            }],
-            [{
-                Country: 'A',
-                GDP: 120,
-                Life: 50,
-                Population: 50
-            }, {
-                Country: 'B',
-                GDP: 50,
-                Life: 50,
-                Population: 100
-            }, {
-                Country: 'C',
-                GDP: 200,
-                Life: 80,
-                Population: 100
-            }],
-            [{
-                Country: 'A',
-                GDP: 120,
-                Life: 40,
-                Population: 50
-            }, {
-                Country: 'B',
-                GDP: 50,
-                Life: 30,
-                Population: 100
-            }, {
-                Country: 'C',
-                GDP: 200,
-                Life: 70,
-                Population: 100
-            }],
-        ]
+
+
+        var gdpScale = d3.scaleLinear()
+            .domain([0, 300000])
+            .range([0, 300])
+
+        var lifeScale = d3.scaleLinear()
+            .domain([0, 100])
+            .range([200, 0])
 
         function updateChart(data) {
             var circles = svg
@@ -80,18 +39,19 @@
             circles
                 .enter()
                 .append('circle')
+                .style('fill', 'rgba(200,200,0,0.6)')
                 .merge(circles)
                 .transition()
                 .attr('r', 10)
                 .attr('cx', function(d, i) {
                     // console.log(d)
                     // console.log(i)
-                    return d['GDP']
+                    return gdpScale(d['GDP'])
                 })
                 .attr('cy', function(d, i) {
                     // console.log(d)
                     // console.log(i)
-                    return d['Life']
+                    return lifeScale(d['Life'])
                 })
 
             circles
@@ -102,11 +62,42 @@
                     d3.select(this).remove()
                 })
 
-            svg.selectAll('circle')
-                .on('click', function() {
-                    console.log('here');
+
+            var texts = svg
+                .selectAll('text')
+                .data(data, function(d, i) {
+                    return d['Country']
+                })
+
+            texts
+                .enter()
+                .append('text')
+                .text(function(d, i) {
+                    return d['Country']
+                })
+                .merge(texts)
+                .transition()
+                .attr('x', function(d, i) {
+                    return gdpScale(d['GDP'])
+                })
+                .attr('y', function(d, i) {
+                    return lifeScale(d['Life'])
+                })
+                .transition()
+
+            texts
+                .exit()
+                .transition()
+                .style('fill', 'rgba(0,0,0,0)')
+                .on('end', function() {
                     d3.select(this).remove()
                 })
+
+            // svg.selectAll('circle')
+            //     .on('click', function() {
+            //         console.log('here');
+            //         d3.select(this).remove()
+            //     })
 
             // svg.on('click', function() {
             //     console.log('there');
@@ -117,14 +108,17 @@
             // })
         }
 
-        var yearIndex = 0;
-        updateChart(data[yearIndex])
+        d3.json('data.json', function(myData) {
+            // console.log(myData)
+            var yearIndex = 0
+                // updateChart(myData[yearIndex])
+            d3.interval(function() {
+                console.log(yearIndex)
+                updateChart(myData[yearIndex])
+                yearIndex = (yearIndex + 1) % myData.length
+            }, 1000)
 
-        // d3.interval(function() {
-        //     console.log(yearIndex)
-        //     updateChart(data[yearIndex])
-        //     yearIndex = (yearIndex + 1) % data.length
-        // }, 1000)
+        })
     </script>
 </body>
 
