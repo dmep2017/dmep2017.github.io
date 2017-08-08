@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="echarts.min.js"></script>
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+
+        option = {
+            title: {
+                text: 'Panama Papers in China',
+                subtext: 'Data from ICIJ',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: ['Intermediaries']
+            },
+            visualMap: {
+                min: 1,
+                max: 4500,
+                left: 'left',
+                top: 'bottom',
+                text: ['高', '低'], // 文本，默认为数值文本
+                calculable: true
+            },
+            toolbox: {
+                show: true,
+                orient: 'vertical',
+                left: 'right',
+                top: 'center',
+                feature: {
+                    dataView: {
+                        readOnly: false
+                    },
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            series: [{
+                name: 'Panama Paper',
+                type: 'map',
+                mapType: 'china',
+                roam: false,
+                label: {
+                    normal: {
+                        show: true
+                    },
+                    emphasis: {
+                        show: true
+                    }
+                },
+                data: [{
+                    name: '北京',
+                    value: 4487
+                }, {
+                    name: '天津',
+                    value: 321
+                }, {
+                    name: '上海',
+                    value: 3819
+                }, {
+                    name: '重庆',
+                    value: 136
+                }, {
+                    name: '河北',
+                    value: 437
+                }, {
+                    name: '河南',
+                    value: 379
+                }, {
+                    name: '云南',
+                    value: 26
+                }, {
+                    name: '辽宁',
+                    value: 1285
+                }, {
+                    name: '黑龙江',
+                    value: 219
+                }, {
+                    name: '湖南',
+                    value: 277
+                }, {
+                    name: '安徽',
+                    value: 256
+                }, {
+                    name: '山东',
+                    value: 2601
+                }, {
+                    name: '新疆',
+                    value: 81
+                }, {
+                    name: '江苏',
+                    value: 1775
+                }, {
+                    name: '浙江',
+                    value: 4191
+                }, {
+                    name: '江西',
+                    value: 284
+                }, {
+                    name: '湖北',
+                    value: 314
+                }, {
+                    name: '广西',
+                    value: 136
+                }, {
+                    name: '甘肃',
+                    value: 49
+                }, {
+                    name: '山西',
+                    value: 247
+                }, {
+                    name: '内蒙古',
+                    value: 53
+                }, {
+                    name: '陕西',
+                    value: 51
+                }, {
+                    name: '吉林',
+                    value: 180
+                }, {
+                    name: '福建',
+                    value: 654
+                }, {
+                    name: '贵州',
+                    value: 65
+                }, {
+                    name: '广东',
+                    value: 4051
+                }, {
+                    name: '青海',
+                    value: 20
+                }, {
+                    name: '西藏',
+                    value: 0
+                }, {
+                    name: '四川',
+                    value: 351
+                }, {
+                    name: '宁夏',
+                    value: 56
+                }, {
+                    name: '海南',
+                    value: 113
+                }, {
+                    name: '香港',
+                    value: 115
+                }]
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>
