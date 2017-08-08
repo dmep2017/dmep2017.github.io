@@ -9,6 +9,7 @@
 
 <body>
     <div id="chart">
+        <div>Title of the graph</div>
         <svg width="300" height="200"></svg>
     </div>
     <script>
@@ -35,24 +36,60 @@
             Population: 100
         }];
 
-        var circles = svg
-            .selectAll('circle')
-            .data(data)
+        var data2 = [{
+            Country: 'A',
+            GDP: 30,
+            Life: 30,
+            Population: 50
+        }, {
+            Country: 'B',
+            GDP: 40,
+            Life: 20,
+            Population: 100
+        }, {
+            Country: 'D',
+            GDP: 10,
+            Life: 50,
+            Population: 100
+        }];
 
-        circles
-            .enter()
-            .append('circle')
-            .attr('r', 10)
-            .attr('cx', function(d, i) {
-                // console.log(d)
-                // console.log(i)
-                return d['GDP']
-            })
-            .attr('cy', function(d, i) {
-                // console.log(d)
-                // console.log(i)
-                return d['Life']
-            })
+        function updateChart(data) {
+            var circles = svg
+                .selectAll('circle')
+                .data(data, function(d, i) {
+                    return d['Country']
+                })
+
+            circles
+                .enter()
+                .append('circle')
+                .merge(circles)
+                .transition()
+                .attr('r', 10)
+                .attr('cx', function(d, i) {
+                    // console.log(d)
+                    // console.log(i)
+                    return d['GDP']
+                })
+                .attr('cy', function(d, i) {
+                    // console.log(d)
+                    // console.log(i)
+                    return d['Life']
+                })
+
+            circles
+                .exit()
+                .transition()
+                .style('fill', 'rgba(0,0,0,0)')
+                .on('end', function() {
+                    d3.select(this).remove()
+                })
+        }
+
+        updateChart(data)
+        setTimeout(function() {
+            updateChart(data2)
+        }, 3000)
     </script>
 </body>
 
