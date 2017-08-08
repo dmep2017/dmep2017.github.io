@@ -204,6 +204,7 @@
 
             function idea4() {
                 var svg = createSVG();
+
                 svg.selectAll('path')
                     .data(sichuan.features)
                     .enter()
@@ -211,6 +212,32 @@
                     .attr('stroke', '#000')
                     .attr('fill', '#eeeeee')
                     .attr('d', geoPath)
+                    .on('mouseover', function(d, i) {
+                        var cp = d.properties.cp
+                        var name = d.properties.name
+                        if (!this.tooltipText) {
+                            this.tooltipText = svg.append('text')
+                        }
+                        this.tooltipText
+                            .attr('x', function() {
+                                return projection(cp)[0]
+                            })
+                            .attr('y', function() {
+                                return projection(cp)[1]
+                            })
+                            .text(name)
+
+                        d3.select(this)
+                            .attr('fill', '#ffcc77')
+                    })
+                    .on('mouseout', function(d, i) {
+                        // console.log(d)
+                        // svg.selectAll('.tooltip').remove()
+                        this.tooltipText.remove()
+                        this.tooltipText = null
+                        d3.select(this)
+                            .attr('fill', '#eeeeee')
+                    })
 
                 var yearText = svg.append('text')
                 yearText
@@ -220,7 +247,7 @@
 
                 var yearIndex = 0;
                 d3.interval(function() {
-                    console.log(yearIndex)
+                    // console.log(yearIndex)
                     yearText.text('Year:' + earthquakeByYear[yearIndex]['year'])
                     svg.selectAll('circle')
                         .data(earthquakeByYear[yearIndex]['data'])
