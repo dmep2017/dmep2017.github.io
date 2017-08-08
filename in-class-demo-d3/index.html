@@ -19,39 +19,56 @@
             //     .attr('cx', 50)
             //     .attr('cy', 160)
             //     .attr('r', 10)
-        var data = [{
-            Country: 'A',
-            GDP: 120,
-            Life: 50,
-            Population: 50
-        }, {
-            Country: 'B',
-            GDP: 50,
-            Life: 50,
-            Population: 100
-        }, {
-            Country: 'C',
-            GDP: 200,
-            Life: 80,
-            Population: 100
-        }];
-
-        var data2 = [{
-            Country: 'A',
-            GDP: 30,
-            Life: 30,
-            Population: 50
-        }, {
-            Country: 'B',
-            GDP: 40,
-            Life: 20,
-            Population: 100
-        }, {
-            Country: 'D',
-            GDP: 10,
-            Life: 50,
-            Population: 100
-        }];
+        var data = [
+            [{
+                Country: 'A',
+                GDP: 30,
+                Life: 30,
+                Population: 50
+            }, {
+                Country: 'B',
+                GDP: 40,
+                Life: 20,
+                Population: 100
+            }, {
+                Country: 'D',
+                GDP: 10,
+                Life: 50,
+                Population: 100
+            }],
+            [{
+                Country: 'A',
+                GDP: 120,
+                Life: 50,
+                Population: 50
+            }, {
+                Country: 'B',
+                GDP: 50,
+                Life: 50,
+                Population: 100
+            }, {
+                Country: 'C',
+                GDP: 200,
+                Life: 80,
+                Population: 100
+            }],
+            [{
+                Country: 'A',
+                GDP: 120,
+                Life: 40,
+                Population: 50
+            }, {
+                Country: 'B',
+                GDP: 50,
+                Life: 30,
+                Population: 100
+            }, {
+                Country: 'C',
+                GDP: 200,
+                Life: 70,
+                Population: 100
+            }],
+        ]
 
         function updateChart(data) {
             var circles = svg
@@ -91,19 +108,23 @@
                     d3.select(this).remove()
                 })
 
-            svg.on('click', function() {
-                console.log('there');
-                svg.append('circle')
-                    .attr('r', 20)
-                    .attr('cx', d3.event.clientX)
-                    .attr('cy', d3.event.clientY)
-            })
+            // svg.on('click', function() {
+            //     console.log('there');
+            //     svg.append('circle')
+            //         .attr('r', 20)
+            //         .attr('cx', d3.event.clientX)
+            //         .attr('cy', d3.event.clientY)
+            // })
         }
 
-        updateChart(data)
-            // setTimeout(function() {
-            //     updateChart(data2)
-            // }, 3000)
+        var yearIndex = 0;
+        updateChart(data[yearIndex])
+
+        // d3.interval(function() {
+        //     console.log(yearIndex)
+        //     updateChart(data[yearIndex])
+        //     yearIndex = (yearIndex + 1) % data.length
+        // }, 1000)
     </script>
 </body>
 
