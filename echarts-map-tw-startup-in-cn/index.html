@@ -32,6 +32,7 @@
                 "bottom": 20,
                 "selectedMode": "multiple",
                 "selected": {
+                    // Configure the selected series(es) at initialization
                     "第一期 (2015/6/18)": true,
                     "第二期 (2015/10/15)": false,
                     "第三期 (2015/12/22)": false,
@@ -41,6 +42,7 @@
                     "color": "#68acea"
                 },
                 "data": [
+                    // The element here corresponds to the "name" of each series. Note that there can be multiple series(es) of the same name so that one switch in legend controls display of multiple series(es)
                     "第一期 (2015/6/18)",
                     "第二期 (2015/10/15)",
                     "第三期 (2015/12/22)",
@@ -99,6 +101,9 @@
                 }
             },
             "series": [{
+                // Series "第一期 (2015/6/18)" appears twice.
+                // One for scattered plot of the startup campus
+                // Another for highlighting the province of interest
                 "name": "第一期 (2015/6/18)",
                 "type": "scatter",
                 "legendHoverLink": false,
@@ -110,6 +115,8 @@
                     "confine": true,
                     "formatter": "{b}"
                 },
+                // Usually it's cartesian system
+                // We can use "geo" and "polar"
                 "coordinateSystem": "geo",
                 "data": [{
                     "name": "廣東省深圳市福田保稅區 廣東深圳中芬設計園",
@@ -143,6 +150,7 @@
                 "tooltip": {
                     "show": false
                 },
+                // Use the same geoIndex so that multiple series can share the same geo component.
                 "geoIndex": 0,
                 "roam": true,
                 "selectedMode": "multiple",
