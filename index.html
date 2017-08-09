@@ -124,7 +124,7 @@
             </div>
         </div>
 
-        <div class='section'>
+        <div class='section active'>
             <div class="container">
                 <div class="row">
                     <h2 class="heading">Slides</h2>
@@ -145,7 +145,7 @@
                 </div>
             </div>
         </div>
-        <div class='section active'>
+        <div class='section'>
             <div class="container">
                 <div class="row">
                     <h2>Team</h2>
@@ -173,7 +173,8 @@
         $(document).ready(function() {
 
             slides.forEach(function(element) {
-                var htmlAnchor = ` <a href="https://docs.google.com/presentation/d/${element.id}/edit#slide=id.p">${element.name}</a>`
+                // var htmlAnchor = ` <a href="https://docs.google.com/presentation/d/${element.id}/edit#slide=id.p">${element.name}</a>`
+                var htmlAnchor = ` <a class="btn btn-default">${element.name}</a> <br>(Click to show slides)`
 
                 var htmlIFrame = `
                 <div class='google-slides'>
@@ -181,10 +182,14 @@
                 </div>
                 `
 
-                $('<div>')
+                var thisSlide = $('<div>')
+                thisSlide
                     .addClass('slide')
-                    .html(htmlAnchor + htmlIFrame)
+                    .html(htmlAnchor)
                     .appendTo('#slides-set')
+                thisSlide.find('a').click(function() {
+                    $(htmlIFrame).appendTo(thisSlide)
+                })
             }, this);
 
             function shuffle(a) {
