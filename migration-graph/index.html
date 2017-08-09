@@ -71,10 +71,10 @@
         var graph = {
             "nodes": nodes, //nodes.slice(0, -1),
             "links": links.filter(function(d) {
+                // Eliminate small valued edges so that the force layout can expand well
                 return d.value > 10000
             }),
         }
-
 
         var svg = d3.select("#chart svg");
         var width = $('svg').width(); // + svg.attr("width");
@@ -95,7 +95,8 @@
             .data(graph.links)
             .enter().append("line")
             .attr("stroke-width", function(d) {
-                return Math.log10(d.value / 10000) + 1;
+                // only plot value>100000 cases
+                return Math.log10(d.value / 100000) + 1;
             });
 
         var node = svg.append("g")
@@ -137,7 +138,16 @@
                 })
                 .attr("y2", function(d) {
                     return d.target.y;
-                });
+                })
+                .style('stroke', function(d) {
+                    // only plot value>100000 cases
+                    if (d.value > 100000) {
+                        return '#999'
+                    } else {
+                        return 'rgba(0, 0, 0, 0)'
+                    }
+                    // console.log(d)
+                })
 
             node
                 .attr("cx", function(d) {
