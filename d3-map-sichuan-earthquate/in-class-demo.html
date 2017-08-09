@@ -84,7 +84,7 @@
                 .data(earthquake.features)
                 .enter()
                 .append('circle')
-                .attr('r', 10)
+                .attr('r', 2)
                 .attr('cx', function(d) {
                     // console.log(d)
                     // console.log(d.geometry.coordinates)
@@ -94,7 +94,17 @@
                 .attr('cy', function(d) {
                     return projection(d.geometry.coordinates)[1]
                 })
-                .attr('fill', 'rgba(200, 0, 0, 0.2)')
+                // .attr('fill', 'rgba(200, 0, 0, 0.2)')
+                .attr('fill', function(d) {
+                    var mag = d.properties.mag;
+                    if (mag >= 7) {
+                        return 'red'
+                    } else if (mag >= 6) {
+                        return 'yellow'
+                    } else {
+                        return 'green'
+                    }
+                })
         })
     </script>
 
