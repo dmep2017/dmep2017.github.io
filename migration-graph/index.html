@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0">
 
     <script src="datanews.caixin.com/mobile/yimin/js/data-immigrant.js"></script>
+    <script src="country.js"></script>
 
     <title>Migration Graph</title>
 
@@ -31,6 +32,15 @@
     </div>
 
     <script>
+        var caixinCountryNameToCode = {};
+        countryCode.forEach(function(element) {
+            caixinCountryNameToCode[element[0]] = element[2]
+        })
+        var countryDict = {};
+        country.forEach(function(element) {
+            countryDict[element['alpha2Code']] = element
+        })
+
         var links = [];
         data[0].forEach(function(element) {
             links.push({
@@ -142,7 +152,11 @@
                 .style('stroke', function(d) {
                     // only plot value>100000 cases
                     if (d.value > 100000) {
-                        return '#999'
+                        if (d.source.id.indexOf('China') != -1) {
+                            return 'red'
+                        } else {
+                            return '#999'
+                        }
                     } else {
                         return 'rgba(0, 0, 0, 0)'
                     }
@@ -155,7 +169,24 @@
                 })
                 .attr("cy", function(d) {
                     return d.y;
-                });
+                })
+                .attr('fill', function(d) {
+                    if (d.id.indexOf('China') != -1) {
+                        return 'red'
+                    } else {
+                        var code = caixinCountryNameToCode[d.id]
+                        if (countryDict[code]) {
+                            return color(countryDict[code].region);
+                            // return color(countryDict[code].subregion);
+
+                        } else {
+                            // console.log(code)
+                            // Help! This is the error entry:
+                            // Channel Islands :"ZZ"
+                            return 'black'
+                        }
+                    }
+                })
         }
 
         function dragstarted(d) {
