@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>移民去远方</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    
+    <link rel="stylesheet" href="style1.css" type="text/css" />
+    <script src="./js/jquery.min.js" charset="utf-8"></script>
+    <script src="./js/d3.min.js" charset="utf-8"></script>   
+    <script src="./js/three.min.js" charset="utf-8"></script>
+    
+</head>
+
+<body>
+  <div class="loading">
+    <div class="loader"></div>
+    <p id="loadingPercent"></p>
+  </div>
+	<div class="cover-wrap mobile-only">
+		<div class="cover-gif"><img src="earth-cover-s.gif" width="100%"></div>
+    <div class="cover-mask"></div>
+    <div class="cover-title"><img src="cover-title.png" width="100%"></div>
+    <img class="cx-logo-mobile" src="cx-datanews.jpg" height="40px">
+    <div class="cover-intro">居住在非出生地国家的人被称作移民。据联合国，2015年全球移民人口达到2.44亿，约占地球人口的3%，这一数字在在2000年为1.73亿，15年间增长7000万。</div>
+    <div class="scroll-down-btn-cover mobile-only"><img src="scroll.png" height="50px"></div> 
+	</div>
+  <div class="tips mobile-only">
+    <div class="arrows"><img src="tips.png" width="100%"></div>
+    <div class="line2">拖动旋转地球</div>
+    <div class="line1">切换国家或地区</div>
+    <div class="hand"><img src="tips-hand.png" width="100%"></div>
+  </div>
+	<div class="main-chart" onselectstart="return false;">
+
+	<div class="scroll-down-btn mobile-only"><img src="scroll.png" height="50px"></div>
+	<div class="scroll-up-btn mobile-only"><img src="back.png"></div>    
+    <div class="legend">
+      <div class="legend-color"></div>
+      <div class="legend-color-text">
+        <div style="width:33.3%;  text-align: left; float:left">♂</div>
+        <div style="width:33.3%; text-align:center; float:left; ">&nbsp;</div>
+        <div style="width:33.3%; text-align:right; float:left">♀</div>
+      </div>
+      
+      <p >每个 <img src="legend-p.png" height="100%"/> 代表50万人</p>
+      <p >小于50万人用<span style="color:#ad62a8"> • </span>表示</p>
+      
+        
+    </div>
+
+    
+    
+    <div class="country-name pc-only"></div>
+    <div class="flag flag-in-1 flag-in">
+      <div class="flag-ranking"></div>
+      <div class="flag-right">
+        <div class="flag-state-name"></div>
+        <div class="flag-data"></div>
+      </div>
+    </div>
+    <div class="flag flag-in-2 flag-in">
+      <div class="flag-ranking"></div>
+      <div class="flag-right">
+        <div class="flag-state-name"></div>
+        <div class="flag-data"></div>
+      </div>
+    </div>
+    <div class="flag flag-in-3 flag-in">
+      <div class="flag-ranking"></div>
+      <div class="flag-right">
+        <div class="flag-state-name"></div>
+        <div class="flag-data"></div>
+      </div>
+    </div>
+    <div class="flag flag-in-4 flag-in">
+      <div class="flag-ranking"></div>
+      <div class="flag-right">
+        <div class="flag-state-name"></div>
+        <div class="flag-data"></div>
+      </div>
+    </div>
+    <div class="flag flag-in-5 flag-in">
+      <div class="flag-ranking"></div>
+      <div class="flag-right">
+        <div class="flag-state-name"></div>
+        <div class="flag-data"></div>
+      </div>
+    </div>
+
+    <div class="flag flag-out-1 flag-out">
+      <div class="flag-ranking"></div>
+      <div class="flag-right">
+        <div class="flag-state-name"></div>
+        <div class="flag-data"></div>
+      </div>
+    </div>
+    <div class="flag flag-out-2 flag-out">
+      <div class="flag-ranking"></div>
+      <div class="flag-right">
+        <div class="flag-state-name"></div>
+        <div class="flag-data"></div>
+      </div>
+    </div>
+    <div class="flag flag-out-3 flag-out">
+      <div class="flag-ranking"></div>
+      <div class="flag-right">
+        <div class="flag-state-name"></div>
+        <div class="flag-data"></div>
+      </div>
+    </div>
+    <div class="flag flag-out-4 flag-out">
+      <div class="flag-ranking"></div>
+      <div class="flag-right">
+        <div class="flag-state-name"></div>
+        <div class="flag-data"></div>
+      </div>
+    </div>
+    <div class="flag flag-out-5 flag-out">
+      <div class="flag-ranking"></div>
+      <div class="flag-right">
+        <div class="flag-state-name"></div>
+        <div class="flag-data"></div>
+      </div>
+    </div>
+   
+    <iput class="input-state-icon">▾</iput>
+    <input class="input-state pc-only" id="input-state" type="text" value="输入国家或地区名"></input>
+    <ul class="input-list-ul pc-only"></ul>
+    
+  <select class="input-state-dropdown mobile-only" id="input-state-mobile" autocomplete="off">
+		
+	</select>
+
+    <ul class="year">
+        <li alt="1990" >1990</li>
+        <li alt="1995">1995</li>
+        <li alt="2000">2000</li>
+        <li alt="2005">2005</li>
+        <li alt="2010" >2010</li>
+        <li alt="2015" class="chosen">2015</li>
+    </ul>
+
+    <div class="tab-both tab">移出＋移入</div>
+    <div class="tab-out tab tab-chosen-out">仅移出</div>
+    <div class="tab-in tab">仅移入</div>
+    
+    
+   
+
+    <div class="state-rank-in-wrap pc-only">
+      <div class="title"><span class="color-out legend-dot"></span> 移出 <span style='display:inline-block; float:right; margin-right:15px; font-size: 10px;'></span></div>     
+      <ul class="state-rank-in"></ul>
+    </div>
+
+     <div class="state-rank-out-wrap pc-only">
+      <div class="title"><span class="color-in legend-dot"></span> 移入 <span style='display:inline-block; float:right; margin-right:0px; font-size: 10px;'>单位:人 (2015年)</span></div>
+      <ul class="state-rank-out"></ul>
+    </div>
+    
+    <div class="policy-wrap policy-wrap-pc" id="policy-wrap">
+      <div class="policy-title">移民政策</div> 
+      <div class="policy-legend">
+      <span style="color: #333">
+      	| 每一条线代表一条实施政策<br/>
+      	■</span>收紧&nbsp; <span style="color: #ffcc00">■</span>放宽&nbsp; <span style="color: #a8956d">■</span>无变化&nbsp;  <span style="color: #dad8d1">■</span>难以评测
+
+      </div>
+      
+       <ul class="policy-bend"></ul>
+       <div class="policy-bend-year"></div>
+    </div>
+
+    <div id="webgl-map"></div>
+
+    <div class="line-chart-legend pc-only">移民总人数趋势图
+     <span style='display:inline-block; float:right; font-size: 10px;'>
+     <span style="color:#ffbb00">▬</span> 移入&nbsp;&nbsp;<span style="color:#ff6600">▬</span> 移出
+     </span>
+    </div>
+    </div>
+
+
+    <div class="text-wrap">
+      <div class="text-mask"></div>
+      <div class="mobile-only blank-screen"></div>
+      <img class="pc-only cx-logo" src="cx-datanews.jpg" height="40px">
+      <p class="title">移民去远方</p>
+      <p><span class="text-important">居住在非出生地国家的人被称作移民。</span>据联合国，2015年国际移民人数达到2.44亿，约占地球人口的3%，这一数字在在2000年为1.73亿，15年间增长7000万。</p>
+
+      <p style="text-align: center">
+      <video style="object-fit:fill;" id="liveVideo" src="text-gif1.mp4" class="text-gif"  x5-video-player-type="h5" x5-video-player-fullscreen="false" webkit-playsinline="true" playsinline="true" loop controls poster="text-video-poster.jpg" ></video>
+	  <br/>
+      <span style="font-size: 14px; color: #777">图：2015年国际移民人数多于100万的线路</span></p>
+      <p>
+      据国际移民组织2017年7月报告，全球有：<br/>
+      7.1亿15岁及以上的成人有一般性移民意愿；<br/>
+      其中约6600万人，着手计划准备在12个月内移民到其他国家；约2300万成人，已做出切实的移民准备。</p>
+      <p>
+      对于移出国而言，移民可以带来丰厚的侨汇，据世界银行，2014年来自发展中国家的移民往家乡汇回了4360亿美元。
+      </p>
+      <p>
+      同时，移民也填补了移入国劳动力短缺并贡献税收。国际移民弥补了悉尼、奥克兰、新加坡、伦敦接近三分之一的人口，阿姆斯特丹、法兰克福和巴黎近四分之一的人口。
+      </p>
+      <p>
+      全球大约有7600万移民生活在欧洲，亚洲略少一点，7500万。北美洲约有5400万，其次是非洲、拉丁美洲、加勒比海地区和大洋洲。2015年，三分之二的国际移民集中在20个国家，高收入国家吸引了71%的移民。
+      </p>
+      <p>
+      女性移民的总量略少于男性，前者的世界平均占比由2000年的49%下降到15年后的48%。
+      </p>
+      <p>
+      世界人口老龄化加剧，移民也一样。2015年世界移民的年龄中位数为39岁，2000年是38岁。
+      </p>
+      <p>
+      并非如所想的，移民大多来自贫穷的国家。事实上，绝大多数的世界移民来自中等收入国家，2015年约有1.57亿的人口从中等收入国家移出，“人往高处走”，他们大都移居去了高收入国家。2000年到2015年间，移民人口贡献了42%的北美洲人口增长，32%的大洋洲人口增长。
+      </p>
+      <p>
+      奋斗，是所有移民的天然属性，不论国际还是国内。大部分移民都是劳动者，移民比本地居民有着更高的劳动市场参与度。
+      </p>
+      <p>
+      伴随着地区冲突加剧，2015年在试图跨越国界时死亡或失踪的人数增加，超过5400名移民在过程中死亡或失踪。据世界移民组织，在移民去欧洲过程中死亡的人数增长15%达到至少3770人，海滩小男孩就是其中一员。
+      </p>
+      <p>
+      世界上最大的移民目的地当属<span class="text-hotspot" alt="United States of America">美国</span> <span style="font-size: 14px; color: #999">(可点击)</span>，据美国移民研究中心，截止2015年12月，约有6100万的移民生活在美国，约占世界移民总数的19%。据美国劳工部预测，到2020年美国新增人口中将有50%来自移民，50%来自本地自然出生人口，移民对美国未来劳动力的影响巨大。
+      </p>
+      <p>
+      美国国务院预计，到2050年，发展中国家将有9亿人找不到工作，这将成为移民增长的首要因素。毕竟高收入国家人均年收入有4.3万美元，而在比较穷的发展中国家，平均只有600美元，一年。
+      </p>
+      <p>
+       <span class="text-hotspot" alt="China">中国</span>内地移至境外人数最多的目标移民地却不是美国，而是<span class="text-hotspot" alt="China, Hong Kong Special Administrative Region">中国香港</span>，2015年共有超过23万内地人移居香港，同时有超过27万的香港人来到内地居住工作。中国内地移出人数最多的目标移民地接下来是<span class="text-hotspot" alt="United States of America">美国</span>、<span class="text-hotspot" alt="Republic of Korea">韩国</span>、<span class="text-hotspot" alt="Canada">加拿大</span>、<span class="text-hotspot" alt="Japan">日本</span>。
+      </p>
+      <p>
+      移民入中国内地人数最多的国家和地区，除香港外，依次是<span class="text-hotspot" alt="Republic of Korea">韩国</span>、<span class="text-hotspot" alt="Brazil">巴西</span>、 <span class="text-hotspot" alt="Philippines">菲律宾</span>。中国不是移民国家，这里的移入指居住在中国内地六个月以上者。
+      </p>
+      <p>
+      香港作为亚洲重要的国际城市，吸引到很多东南亚居民，<span class="text-hotspot" alt="Indonesia">印尼</span>、<span class="text-hotspot" alt="Philippines">菲律宾</span>移入香港工作生活的人中超九成为女性，在香港的印尼人中女性占比达到93.3%，约12.5万人。<span class="text-hotspot" alt="Singapore">新加坡</span>的情况也差不多，<span class="text-hotspot" alt="Thailand">泰国</span>和<span class="text-hotspot" alt="Philippines">菲律宾</span>2015年移入新加坡的人口中女性的比率皆超过84%。
+      </p>
+      <p>
+      <span class="text-hotspot" alt="Germany">德国</span>是世界移民的第二大目的地国家，2015年，估计约有1100万外国出生的居民居住在德国，对于一共只有8000多万人口的德国来说，这个比例非常高。据德国联邦统计局，仅2015年到达德国的外国人就有200万，净增加110万人。
+      </p>
+      <p>
+      多数德国移民来自于欧盟内的其他国家，如东欧的<span class="text-hotspot" alt="Poland">波兰</span>、<span class="text-hotspot" alt="Romania">罗马尼亚</span>、<span class="text-hotspot" alt="Bulgaria">保加利亚</span>和<span class="text-hotspot" alt="Hungary">匈牙利</span>。德国全国近五分之一的人口，都有移民背景。德国同样是难民个人庇护申请最多的国家，截止2015年末约德国约接收到97.4万份难民申请，包括44.2万的个人难民庇护。 </p>
+      <p>
+       <span class="text-hotspot" alt="United Kingdom of Great Britain and Northern Ireland">英国</span>官方统计，2016年英国劳动力市场中，移民人数达340万，占比11%，其中欧盟贡献7%。批发零售行业、餐饮酒店业、金融和商业，都是移民聚集的行业。在从事同类工作时，外国移民劳动力的受教育水平相对更高。
+      </p>
+      <p>
+      中国每每胜在人多，但在向外移民这件事上，输给了<span class="text-hotspot" alt="India">印度</span>。印度是全球最大的移民输出国，共有1600万人移民海外，男多女少。
+      </p>
+      <p>
+      外国出生人口占总人口最多的是<span class="text-hotspot" alt="United Arab Emirates">阿联酋</span>、 <span class="text-hotspot" alt="Qatar">卡塔尔</span>和<span class="text-hotspot" alt="Kuwait">科威特</span>。世界移民填补了88.4%的阿联酋人口、75.7%的卡塔尔人口、73.6%的科威特人口。
+</p>
+      <p class="mobile-only">其实，故事讲到这里，只讲了一部分而已，还有好多，请你去PC看。</p>
+      <p class="mobile-only">注：更多数据（含232个国家和地区）请至PC端浏览 caixin.com/yimin</p>
+      <p class="credits">
+	      数据来源：联合国，Department of Economic and Social Affairs；国际移民组织；德国联邦统计局；英国国家统计局<br/>
+	      <br/>
+	      记者: 陈香君&nbsp;/&nbsp;设计开发: 韦梦&nbsp;/&nbsp;监制: 黄晨&nbsp;<br/>
+	      冷斌对此项目亦有贡献<br/>
+	      <br/>
+	      财新数据可视化实验室出品
+      </p>
+      <p class="credits-qr mobile-only"><img src="cx-qr.jpg" width="60%">
+      <br/> 长按二维码下载财新APP</p>
+    </div>
+    <script type="text/javascript">
+        $(".loading").css("padding-top",$(window).height()*0.45+"px")
+        $(".loader").css("opacity",1)
+        if($(window).width()<640){
+              $("#loadingPercent").html("建议在Wi-Fi环境浏览").css("opacity",1);
+              setTimeout(function(){$(".loading").fadeOut();},3000)   
+        }else{
+              $("#loadingPercent").html("推荐在Google Chrome、Safari、Firefox（43.0.4以上版本）观看").css("opacity",1); 
+              setTimeout(function(){$(".loading").fadeOut();},2000)
+        }
+    </script>
+
+    <script src="./js/threeGeoJSON.js" charset="utf-8"></script>
+    <script src="./js/OrbitControls.js" charset="utf-8"></script>  
+    <script src="./js/Projector.js" charset="utf-8"></script>  
+    <script src="./js/data-policy.js" charset="utf-8"></script>
+    <script src="./js/data-immigrant.js" charset="utf-8"></script>
+    <script src="./js/drawData.js" charset="utf-8"></script>
+    <script type="text/javascript">
+
+        var thisYear = 5; //0-1990, 1-1995, 2-2000, 3-2005, 4-2010, 5-2015
+        var thisState = null;
+        var thisMode = "both"; // in , out
+        var thisMin = 1000000; 
+
+        
+        if(!isMobile()){
+        	var myPlayer = document.getElementById('liveVideo');
+			myPlayer.play();
+		}
+
+        $(".text-hotspot").click(function(){
+          var state = $(this).attr("alt");
+          var stateCN = $(this).html()
+          cleanScene();
+          
+          drawData(thisYear, state, "both", showMin) 
+          var countyCode = getStateAbbr(state);
+          hightLightState(countyCode);
+          if(isMobile()){
+          	var no;
+	        for(var i=0; i<countryCodeMobile.length; i++){
+	        	if(countryCodeMobile[i][0]==state) no=i;
+	        }
+	        var drop = document.getElementById("input-state-mobile");
+	        drop.options[no].selected = true;
+
+      	  }
+        })
+
+        $(".input-state-icon").click(function(){
+          var ul = $(".input-list-ul");
+            //document.getElementById("input-state").value="";
+            getStateName("");
+            $(".input-list-ul").css("display","block")
+        })
+        $(".input-state").focus(function(){
+            var ul = $(".input-list-ul");
+            //ul.html("");
+            //document.getElementById("input-state").value="";
+            getStateName("");
+            $(".input-list-ul").css("display","block")
+        })
+
+        $("#webgl-map").click(function(){
+          if($(".input-list-ul").css("display")=="block"){
+            
+            $(".input-list-ul").css("display","none")
+            $(".input-state").attr("onfocus",false)
+          }
+        })
+
+        $(".input-state").bind("input",function(){
+            var str=document.getElementById("input-state").value
+            //console.log(str);
+            getStateName(str);
+            $(".input-list-ul").css("display","block")
+        })
+
+        $(".tab-in").click(function(){
+           //if(thisMode!="in"&&thisState!=null){
+              
+               $(".tab-out").removeClass("tab-chosen-out");
+               $(".tab-both").removeClass("tab-chosen-both");
+               $(".tab-in").addClass("tab-chosen-in")
+               
+               $(".flag-out").hide()
+               $(".flag-in").show()
+              
+               groupIn.visible=true;
+               groupOut.visible=false;
+              
+           //}
+        })
+
+        $(".tab-out").click(function(){
+           //if(thisMode!="out"&&thisState!=null){
+               
+               $(".tab-in").removeClass("tab-chosen-in");
+               $(".tab-both").removeClass("tab-chosen-both");
+               $(".tab-out").addClass("tab-chosen-out")
+               
+               $(".flag-out").show()
+               $(".flag-in").hide()
+               groupIn.visible=false;
+               groupOut.visible=true;
+           //}
+        })
+
+        $(".tab-both").click(function(){
+           //if(thisMode!="both"&&thisState!=null){
+               
+               $(".tab-in").removeClass("tab-chosen-in");
+			   $(".tab-both").removeClass("tab-chosen-both").addClass("tab-chosen-both");
+			   $(".tab-out").removeClass("tab-chosen-out")
+              
+               $(".flag-out").show()
+               $(".flag-in").show()
+               groupIn.visible=true;
+               groupOut.visible=true;
+              
+           //}
+        })
+
+       
+
+       
+
+        function getStateName(str){
+            
+            var ul = $(".input-list-ul");
+            ul.html("");
+            for(var i in countryCode){
+                if(isIncludeStr(str,countryCode[i][0],"en")||isIncludeStr(str,countryCode[i][5],"cn")) {
+                    var li = $("<li>"+countryCode[i][5]+" | "+countryCode[i][0]+"</li>");
+                    ul.append(li);
+                }
+            }
+
+
+            $(".input-list-ul").find("li").click(function(){
+                        var str=$(this).html();
+                        var tmp=str.split(" | ");
+                        //var tmp1=tmp[1].split(")");
+                        var key = tmp[1];
+                        
+                        cleanScene();
+                        ul.html("");
+                        document.getElementById("input-state").value=tmp[0];
+                        var countyCode = getStateAbbr(key);
+          				hightLightState(countyCode);
+                        drawData(thisYear, key, "both", showMin)
+                       
+
+            })
+        }
+
+        
+
+        function isIncludeStr(str, fullStr, mode){
+            var tmp;
+            if(mode=="en")
+                tmp = fullStr.toLowerCase().split(str.toLowerCase());
+              //tmp = fullStr.split(str)
+            else if(mode=="cn")
+                tmp = fullStr.split(str);
+            if(tmp.length>1) return true;
+            else return false;
+        }
+
+        
+        // Earth params
+        var radius = 10;
+        var segments = 32;
+        var rotation = 0;
+
+        //New scene and camera
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(50, width / height, 0.01, 1000);
+        var raycaster = new THREE.Raycaster();
+       
+       
+        
+        camera.position.x = 0;
+        camera.position.y = 0;
+        camera.position.z = isMobile()?44:34;
+
+        //console.log(camera.position.x, camera.position.y,camera.position.z)
+
+       
+        //New Renderer
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize(width, height);
+        //renderer.setClearColor( 0x272a2d );
+        renderer.setClearColor( 0xeeece4 );
+        
+        var canvas = renderer.domElement;
+        canvas.style.display = "block";
+        document.getElementById("webgl-map").appendChild(canvas);
+
+        //Add lighting
+        var light =  new THREE.AmbientLight(0xFFFFFF);
+        //light.position.set(20, 20, 20);
+        light.name = "AmbientLight"
+        scene.add(light);
+
+        var light = new THREE.DirectionalLight(0xf7f5ed, .08);
+        light.position.set(110, 70, 0);
+        light.name = "DirectionalLight"
+        scene.add(light);
+
+        var light = new THREE.DirectionalLight(0xf7f5ed, .05);
+        light.position.set(-100, 50, 40);
+        light.name = "DirectionalLight"
+        scene.add(light);
+
+        var maps=[]
+        var loader = new THREE.TextureLoader();
+        loader.load( 'worldmap.jpg', function ( texture ) {
+                    var geometry = new THREE.SphereGeometry(9.98 , 32, 32);
+                    var material = new THREE.MeshPhongMaterial;
+                    material.map = texture;
+                    var earth = new THREE.Mesh(geometry,  material);
+                    earth.visible = false;
+                    scene.add(earth);
+                    scene.add(groupWrap);                    
+                    render();
+                    maps.push(earth);
+
+
+                    loader.load( 'worldmap-cn.jpg', function ( texture ) {
+			        	 var geometry = new THREE.SphereGeometry(9.98 , 32, 32);
+			             var material = new THREE.MeshPhongMaterial;
+			             material.map = texture;             
+			             var earth = new THREE.Mesh(geometry,  material);
+			             earth.name = "earth-CN";
+			             earth.visible = true;
+			             scene.add(earth);
+			             maps.push(earth);
+			        })
+
+			        loader.load( 'worldmap-us.jpg', function ( texture ) {
+			        	 var geometry = new THREE.SphereGeometry(9.98 , 32, 32);
+			             var material = new THREE.MeshPhongMaterial;
+			             material.map = texture;
+			             var earth = new THREE.Mesh(geometry,  material);
+			             earth.name = "earth-US";
+			             earth.visible = false;
+			             scene.add(earth);
+			             maps.push(earth);
+			        })
+
+			        loader.load( 'worldmap-br.jpg', function ( texture ) {
+			        	 var geometry = new THREE.SphereGeometry(9.98 , 32, 32);
+			             var material = new THREE.MeshPhongMaterial;
+			             material.map = texture;
+			             var earth = new THREE.Mesh(geometry,  material);
+			             earth.name = "earth-BR";
+			             earth.visible = false;
+			             scene.add(earth);
+			             maps.push(earth);
+			        })
+
+			        loader.load( 'worldmap-in.jpg', function ( texture ) {
+			        	 var geometry = new THREE.SphereGeometry(9.98 , 32, 32);
+			             var material = new THREE.MeshPhongMaterial;
+			             material.map = texture;
+			             var earth = new THREE.Mesh(geometry,  material);
+			             earth.name = "earth-IN";
+			             earth.visible = false;
+			             scene.add(earth);
+			             maps.push(earth);
+			        })
+
+			        loader.load( 'worldmap-au.jpg', function ( texture ) {
+			        	 var geometry = new THREE.SphereGeometry(9.98 , 32, 32);
+			             var material = new THREE.MeshPhongMaterial;
+			             material.map = texture;
+			             var earth = new THREE.Mesh(geometry,  material);
+			             earth.name = "earth-AU";
+			             earth.visible = false;
+			             scene.add(earth);
+			             maps.push(earth);
+			        })
+
+			        loader.load( 'worldmap-cl.jpg', function ( texture ) {
+			        	 var geometry = new THREE.SphereGeometry(9.98 , 32, 32);
+			             var material = new THREE.MeshPhongMaterial;
+			             material.map = texture;
+			             var earth = new THREE.Mesh(geometry,  material);
+			             earth.name = "earth-CL";
+			             earth.visible = false;
+			             scene.add(earth);
+			             maps.push(earth);
+			        })
+
+			        loader.load( 'worldmap-ar.jpg', function ( texture ) {
+			        	 var geometry = new THREE.SphereGeometry(9.98 , 32, 32);
+			             var material = new THREE.MeshPhongMaterial;
+			             material.map = texture;
+			             var earth = new THREE.Mesh(geometry,  material);
+			             earth.name = "earth-AR";
+			             earth.visible = false;
+			             scene.add(earth);
+			             maps.push(earth);
+			        })
+
+			        loader.load( 'worldmap-ru.jpg', function ( texture ) {
+			        	 var geometry = new THREE.SphereGeometry(9.98 , 32, 32);
+			             var material = new THREE.MeshPhongMaterial;
+			             material.map = texture;
+			             var earth = new THREE.Mesh(geometry,  material);
+			             earth.name = "earth-RU";
+			             earth.visible = false;
+			             scene.add(earth);
+			             maps.push(earth);
+			        })
+
+			        loader.load( 'worldmap-ca.jpg', function ( texture ) {
+			        	 var geometry = new THREE.SphereGeometry(9.98 , 32, 32);
+			             var material = new THREE.MeshPhongMaterial;
+			             material.map = texture;
+			             var earth = new THREE.Mesh(geometry,  material);
+			             earth.name = "earth-CA";
+			             earth.visible = false;
+			             scene.add(earth);
+			             maps.push(earth);
+			        })
+
+					loader.load( 'worldmap-mx.jpg', function ( texture ) {
+			        	 var geometry = new THREE.SphereGeometry(9.98 , 32, 32);
+			             var material = new THREE.MeshPhongMaterial;
+			             material.map = texture;
+			             var earth = new THREE.Mesh(geometry,  material);
+			             earth.name = "earth-MX";
+			             earth.visible = false;
+			             scene.add(earth);
+			             maps.push(earth);
+			        })
+			        loader.load( 'worldmap-mn.jpg', function ( texture ) {
+			        	 var geometry = new THREE.SphereGeometry(9.98 , 32, 32);
+			             var material = new THREE.MeshPhongMaterial;
+			             material.map = texture;
+			             var earth = new THREE.Mesh(geometry,  material);
+			             earth.name = "earth-MN";
+			             earth.visible = false;
+			             scene.add(earth);
+			             maps.push(earth);
+			        })
+			        loader.load( 'worldmap-tl.jpg', function ( texture ) {
+			        	 var geometry = new THREE.SphereGeometry(9.98 , 32, 32);
+			             var material = new THREE.MeshPhongMaterial;
+			             material.map = texture;
+			             var earth = new THREE.Mesh(geometry,  material);
+			             earth.name = "earth-TH";
+			             earth.visible = false;
+			             scene.add(earth);
+			             maps.push(earth);
+			        })
+
+			         loader.load( 'worldmap-ka.jpg', function ( texture ) {
+			        	 var geometry = new THREE.SphereGeometry(9.98 , 32, 32);
+			             var material = new THREE.MeshPhongMaterial;
+			             material.map = texture;
+			             var earth = new THREE.Mesh(geometry,  material);
+			             earth.name = "earth-KZ";
+			             earth.visible = false;
+			             scene.add(earth);
+			             maps.push(earth);
+			        })
+
+			          loader.load( 'worldmap-uz.jpg', function ( texture ) {
+			        	 var geometry = new THREE.SphereGeometry(9.98 , 32, 32);
+			             var material = new THREE.MeshPhongMaterial;
+			             material.map = texture;
+			             var earth = new THREE.Mesh(geometry,  material);
+			             earth.name = "earth-UZ";
+			             earth.visible = false;
+			             scene.add(earth);
+			             maps.push(earth);
+			        })
+
+
+
+        });
+
+        
+        
+
+                    
+
+        //Draw the GeoJSON
+        var test_json = $.getJSON("./geojson/world-110m-new.geo.json", function(data) {
+        
+            drawThreeGeo(data, 10, 'sphere', {
+                color: '#222'
+            })
+        });
+
+       
+        
+        var controls = new THREE.OrbitControls( camera, renderer.domElement );
+        controls.enableZoom = true;
+        controls.enablePan = false;
+        controls.enableRotate = true;
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.1;
+        controls.minDistance = 11;
+        controls.maxDistance = 100;
+        
+
+        if(isMobile())
+			controls.rotateSpeed = 0.1;
+	    else
+	    	controls.rotateSpeed = 0.5;
+
+    
+        //Render the image
+        var t=0;
+        var time=0;
+        var animFrame=0;
+
+        function onWindowResize() {
+          width = isMobile()?window.innerWidth:(window.innerWidth*0.85);
+		      height = window.innerHeight;
+          camera.aspect = width / height;
+          camera.updateProjectionMatrix();
+
+          renderer.setSize(width, height);
+
+        }
+
+
+        window.addEventListener( 'resize', onWindowResize, false );
+
+        function render() {
+
+          requestAnimationFrame(render);
+          renderer.render(scene, camera);
+          controls.update()
+          if(mobileZoom==false) updateFlag();
+          updateInfoBox();
+          
+          for(var i=0; i<movingBalls.length; i++){
+              var lastOne = movingBalls[i].length-1;
+              for( var j = 0; j < movingBalls[i].length-1; j++ ) {
+                  var pt=[];
+                  if(t + j/(movingBalls[i].length-1) >= 1) pt = paths[i].getPoint(t + j/(movingBalls[i].length-1) - 1)
+                  else pt = paths[i].getPoint(t + j/(movingBalls[i].length-1) );
+                  if(movingBalls[i][lastOne]!="ball"){
+                    var shift = 0.2;
+                    movingBalls[i][j].position.set( pt.x, pt.y+shift, pt.z );
+                  } 
+                  else
+                    movingBalls[i][j].position.set( pt.x, pt.y, pt.z ); 
+
+              }
+           }
+
+           t = t + 0.0025;
+           if(t>=1) t=0;
+           
+           
+           //if(time<125){
+              //camera.position.z-=0.55
+           //}
+           //time++;
+
+        }
+
+        var fullHeight;
+        var startY1=0,moveY1=0; //手指移动距离
+
+        if(isMobile()){
+          fullHeight=$(".text-wrap").height();
+          $(".text-wrap").hide();
+
+        	$("#input-state").hide()
+        	$(".scroll-up-btn").hide()
+  			$("#policy-wrap").removeClass("policy-wrap-pc").addClass("policy-wrap-mobile");
+  			
+			$(".blank-screen").css("left",width+"px").css("height",height*0.3+"px")
+
+			
+			$(".scroll-down-btn").find("img").bind("touchstart",function(e){
+				startY1 = e.originalEvent.targetTouches[0].pageY;				
+			})
+
+			$(".scroll-down-btn").find("img").bind("touchmove",function(e){
+				moveY1 = e.originalEvent.targetTouches[0].pageY - startY1;				
+			})
+
+			$(".scroll-down-btn").find("img").bind("touchend",function(e){								
+				if(moveY1<=0){					
+         	
+          			$(".text-wrap").show();
+
+          			var myPlayer = document.getElementById('liveVideo');
+           			myPlayer.play();
+
+					$(".main-chart,#webgl-map").css("height",height*0.3+"px")
+					$("body").animate({scrollTop:"0px"},100);
+			        camera.aspect = window.innerWidth / (window.innerHeight*0.3);
+			        camera.fov = 30;
+			        camera.updateProjectionMatrix();
+			        renderer.setSize(window.innerWidth , window.innerHeight*0.3);
+			        $(".flag").hide()
+			        $(".tab, .policy-wrap, .legend").css("opacity",0)
+			        $(".input-state-dropdown").css("borderBottom","0px")
+			        $(".scroll-up-btn, .text-mask").show()
+			        $(".scroll-down-btn, .input-state-icon").hide()
+			        mobileZoom=true;	
+			        moveY1=0;
+		      }		        
+			})
+
+			$(".text-wrap").bind("touchstart",function(e){
+				startY1 = e.originalEvent.targetTouches[0].pageY;				
+			})
+
+			$(".text-wrap").bind("touchmove",function(e){
+				moveY1 = e.originalEvent.targetTouches[0].pageY - startY1;				
+			})
+
+			$(".text-wrap").bind("touchend",function(e){								
+				if(moveY1>30&&document.body.scrollTop<5){	
+
+					$(".main-chart, #webgl-map").css("height",height+"px")
+					$("body").animate({scrollTop:"0px"},100);
+					height = window.innerHeight;
+			        camera.aspect = window.innerWidth / window.innerHeight;
+			        camera.fov = 50;
+			        camera.updateProjectionMatrix();
+			        renderer.setSize(window.innerWidth,  window.innerHeight);
+			        $(".flag").show()
+			        $(".tab, .policy-wrap, .legend").css("opacity",1)
+			        $(".input-state-dropdown").css("borderBottom","#444 2px solid")
+			        $(".scroll-up-btn, .text-mask").hide()
+			        $(".scroll-down-btn, .input-state-icon").show()
+			        mobileZoom=false;
+              moveY1=0;
+              setTimeout(function(){$(".text-wrap").hide();},500);
+		        }		        
+			})
+
+      $(".cover-wrap").bind("touchstart",function(e){
+        startY1 = e.originalEvent.targetTouches[0].pageY;       
+      })
+
+      $(".cover-wrap").bind("touchmove",function(e){
+        moveY1 = e.originalEvent.targetTouches[0].pageY - startY1;        
+      })
+      
+      
+
+      $(".cover-wrap").bind("touchend",function(e){                
+        if(moveY1<-10){         
+          //document.addEventListener('touchmove', handler, false);
+          $(".cover-wrap").animate({top:"-1000px"},500);
+          $(".tips").fadeIn().bind("touchstart",function()
+            {
+              $(".tips").fadeOut(); 
+              setTimeout(function(){$(".tips").css("top","-1000px");},1000)
+            })
+          moveY1 = 0;  
+        }      
+      })
+
+      function handler() {
+        event.preventDefault();
+      }
+
+			$(".scroll-up-btn").bind("click",function(){
+				$(".main-chart, #webgl-map").css("height",height+"px")
+				$("body").animate({scrollTop:"0px"},100);
+				height = window.innerHeight;
+		        camera.aspect = window.innerWidth / window.innerHeight;
+		        camera.fov = 50;
+		        camera.updateProjectionMatrix();
+		        renderer.setSize(window.innerWidth,  window.innerHeight);
+           		$(".flag").show();
+                $(".flag, .tab, .policy-wrap, .legend").css("opacity",1)
+		        $(".input-state-dropdown").css("borderBottom","#444 2px solid")
+		        $(".scroll-up-btn, .text-mask").hide()
+		        $(".scroll-down-btn, .input-state-icon").show()
+		        mobileZoom=false;
+
+
+			})
+		
+			for(var i=0; i<countryCodeMobile.length; i++){
+				var opt="<option value='"+countryCodeMobile[i][0]+"'>"+countryCodeMobile[i][5]+"</option>";
+				$(".input-state-dropdown").append(opt);
+			}
+
+			$(".input-state-dropdown").change(function(){
+	                        
+	                    var key=$(this).find("option:selected").attr("value");
+	                    var name=$(this).find("option:selected").text();
+	                    if(key){
+	                        cleanScene();
+	                        var countyCode = getStateAbbr(key);
+          					      hightLightState(countyCode);
+
+	                        drawData(thisYear, key, "both", showMin)
+	                      
+	                        
+	                    }
+
+
+	         })
+		}
+
+		drawData(thisYear, "China", "both", showMin)
+    </script>
+
+    <!-- 财新网客户端分享代码 -->
+<div style="display:none" id="__cxnewsapp_topbar">分享按钮是否显示的标志</div>
+<div style="display:none" id="__cxnewsapp_orientation">flexible</div>
+<div style="display:none" id="__cxnewsapp_sharetext">财新｜留下还是远方，世界上2.44亿移民从哪来又到哪去？</div>
+<div style="display:none" id="__cxnewsapp_sharephotourl">http://datanews.caixin.com/mobile/yimin/weixin.jpg</div>
+<div style="display:none" id="__cxnewsapp_sharewxurl">http://datanews.caixin.com/mobile/yimin/index.html</div>
+<div style="display:none" id="__cxnewsapp_sharewxthumburl">http://datanews.caixin.com/mobile/yimin/weixin.jpg</div>
+<div style="display:none" id="__cxnewsapp_sharewxtitle">财新｜留下还是远方，世界上2.44亿移民从哪来又到哪去？</div>
+<div style="display:none" id="__cxnewsapp_sharewxtext">男多女少、越来越老已是国际移民大趋势，想移民的7亿人何处安身</div>
+
+<!-- 微信分享代码 -->
+
+<script src="http://datanews.caixin.com/mobile/webjs/jweixin-1.0.0.js"></script>
+<script src="http://datanews.caixin.com/mobile/webjs/get_wx_config.js"></script>
+<script>
+  
+    getWXConfig();
+
+    var imgUrl = "http://datanews.caixin.com/mobile/yimin/weixin.jpg";
+    var lineLink = "http://datanews.caixin.com/mobile/yimin/index.html";
+    var shareTitle = '财新｜留下还是远方，世界上2.44亿移民从哪来又到哪去？';
+    var descContent = '男多女少、越来越老已是国际移民大趋势，想移民的7亿人何处安身';
+  
+    var appid = '';
+
+    wx.ready(function(){
+        wx.onMenuShareTimeline({
+            title: shareTitle, // 分享标题
+            link: lineLink, // 分享链接
+            imgUrl: imgUrl, // 分享图标
+            success: function () {
+                // 用户下一步分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+        wx.onMenuShareAppMessage({
+            title: shareTitle, // 分享标题
+            desc: descContent, // 分享描述
+            link: lineLink, // 分享链接
+            imgUrl: imgUrl, // 分享图标
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户下一步分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+        wx.onMenuShareQQ({
+            title: shareTitle, // 分享标题
+            desc: descContent, // 分享描述
+            link: lineLink, // 分享链接
+            imgUrl: imgUrl, // 分享图标
+            success: function () {
+                // 用户下一步分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+        wx.onMenuShareWeibo({
+            title: shareTitle, // 分享标题
+            desc: descContent, // 分享描述
+            link: lineLink, // 分享链接
+            imgUrl: imgUrl, // 分享图标
+            success: function () {
+                // 用户下一步分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    });
+ 
+</script>
+
+<!--caixin analytics start-->
+<script type="text/javascript" src="http://file.caixin.com/webjs/common/caixinlog.js"></script>
+<!--caixin analytics end-->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create','UA-27956240-1','caixin.com');
+ga('require','displayfeatures');
+
+var dimensionObject = document.getElementById("author_baidu");
+if(typeof(dimensionObject)=="object"&&dimensionObject!=null){
+var dimensionValue = dimensionObject.innerHTML;
+ga('set','dimension1',dimensionValue);
+ga('send','pageview',{'dimension1':dimensionValue});
+}else{
+ga('send','pageview');
+}
+</script>
+
+
+</body>
+
+</html>
