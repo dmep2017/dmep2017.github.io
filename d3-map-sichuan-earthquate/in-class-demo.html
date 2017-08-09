@@ -52,16 +52,18 @@
 
     <script>
         var svg = d3.select('#chart svg')
-        d3.json('si_chuan_geo.json', function(sichuan) {
-            var projection = d3
-                .geoMercator()
-                .center([
-                    106.029052734375,
-                    30.741835717889792
-                ])
-                .scale(900)
-                .translate([350 / 2, 250 / 2])
 
+        var projection = d3
+            .geoMercator()
+            .center([
+                106.029052734375,
+                30.741835717889792
+            ])
+            .scale(900)
+            .translate([350 / 2, 250 / 2])
+
+
+        d3.json('si_chuan_geo.json', function(sichuan) {
             var geoPath = d3
                 .geoPath()
                 .projection(projection)
@@ -75,6 +77,24 @@
                 .attr('d', geoPath)
                 .style('stroke', 'black')
                 .style('fill', 'grey')
+        })
+
+        d3.json('earthquake.geo.json', function(earthquake) {
+            svg.selectAll('circle')
+                .data(earthquake.features)
+                .enter()
+                .append('circle')
+                .attr('r', 10)
+                .attr('cx', function(d) {
+                    // console.log(d)
+                    // console.log(d.geometry.coordinates)
+                    // console.log(projection(d.geometry.coordinates))
+                    return projection(d.geometry.coordinates)[0]
+                })
+                .attr('cy', function(d) {
+                    return projection(d.geometry.coordinates)[1]
+                })
+                .attr('fill', 'rgba(200, 0, 0, 0.2)')
         })
     </script>
 
