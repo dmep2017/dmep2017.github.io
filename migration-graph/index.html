@@ -28,6 +28,11 @@
 
 <body>
     <div id="chart">
+        <div id="tooltip">
+            <div>Country: <span id="country"></span></div>
+            <div>Region: <span id="region"></span></div>
+            <div>Sub-Region: <span id="subregion"></span></div>
+        </div>
         <svg width="480px" height="420px"></svg>
     </div>
 
@@ -128,6 +133,18 @@
                 return d.id;
             });
 
+        node.on('mouseover', function(d) {
+            var code = caixinCountryNameToCode[d.id]
+            if (countryDict[code]) {
+                d3.select('#tooltip #country').text(countryDict[code].name)
+                d3.select('#tooltip #region').text(countryDict[code].region)
+                d3.select('#tooltip #subregion').text(countryDict[code].subregion)
+
+            } else {
+                return;
+            }
+        })
+
         simulation
             .nodes(graph.nodes)
             .on("tick", ticked);
@@ -178,7 +195,6 @@
                         if (countryDict[code]) {
                             return color(countryDict[code].region);
                             // return color(countryDict[code].subregion);
-
                         } else {
                             // console.log(code)
                             // Help! This is the error entry:
