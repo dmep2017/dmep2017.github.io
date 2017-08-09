@@ -6,12 +6,13 @@
     <title>ECharts</title>
     <!-- 引入 echarts.js -->
     <script src="echarts.min.js"></script>
+    <!-- 引入 echarts 官方地图 -->
+    <script src="china.js"></script>
 </head>
 
 <body>
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
     <div id="main" style="width: 600px;height:400px;"></div>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main'));
