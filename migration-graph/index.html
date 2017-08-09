@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="reset.css">
+    <script src="d3.v4.min.js"></script>
+    <script src="jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0">
+
+    <script src="datanews.caixin.com/mobile/yimin/js/data-immigrant.js"></script>
+
+    <title>Migration Graph</title>
+
+    <style>
+        .links line {
+            stroke: #999;
+            stroke-opacity: 0.6;
+        }
+        
+        .nodes circle {
+            stroke: #fff;
+            stroke-width: 1.5px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div id="chart">
+        <svg width="480px" height="420px"></svg>
+    </div>
+
+    <script>
+        var links = [];
+        data[0].forEach(function(element) {
+            links.push({
+                "source": element[0],
+                "target": element[1],
+                "value": element[2]
+            });
+            links.push({
+                "source": element[1],
+                "target": element[0],
+                "value": element[3]
+            })
+        })
+        var nodesDict = {};
+        var nodes = []
+        links.forEach(function(element) {
+            nodesDict[element["source"]] = {}
+            nodesDict[element["target"]] = {}
+        });
+        Object.keys(nodesDict).forEach(function(element) {
+                nodes.push({
+                    "id": element,
+                    "group": 0
+                })
+            })
+            // nodes = [{
+            //     "id": "Myriel",
+            //     "group": 1
+            // }, {
+            //     "id": "Napoleon",
+            //     "group": 1
+            // }]
+            // links = [{
+            //     "source": "Napoleon",
+            //     "target": "Myriel",
+            //     "value": 1
+            // }]
+        var graph = {
+            "nodes": nodes, //nodes.slice(0, -1),
+            "links": links.filter(function(d) {
+                return d.value > 10000
+            }),
+        }
+
+
+        var svg = d3.select("#chart svg");
+        var width = $('svg').width(); // + svg.attr("width");
+        var height = $('svg').height(); // +svg.attr("height");
+
+        var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+        var simulation = d3.forceSimulation()
+            .force("link", d3.forceLink().id(function(d) {
+                return d.id;
+            }))
+            .force("charge", d3.forceManyBody())
+            .force("center", d3.forceCenter(width / 2, height / 2));
+
+        var link = svg.append("g")
+            .attr("class", "links")
+            .selectAll("line")
+            .data(graph.links)
+            .enter().append("line")
+            .attr("stroke-width", function(d) {
+                return Math.log10(d.value / 10000) + 1;
+            });
+
+        var node = svg.append("g")
+            .attr("class", "nodes")
+            .selectAll("circle")
+            .data(graph.nodes)
+            .enter().append("circle")
+            .attr("r", 5)
+            .attr("fill", function(d) {
+                return color(d.group);
+            })
+            .call(d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended));
+
+        node.append("title")
+            .text(function(d) {
+                return d.id;
+            });
+
+        simulation
+            .nodes(graph.nodes)
+            .on("tick", ticked);
+
+        simulation.force("link")
+            .links(graph.links);
+
+        function ticked() {
+            link
+                .attr("x1", function(d) {
+                    return d.source.x;
+                })
+                .attr("y1", function(d) {
+                    return d.source.y;
+                })
+                .attr("x2", function(d) {
+                    return d.target.x;
+                })
+                .attr("y2", function(d) {
+                    return d.target.y;
+                });
+
+            node
+                .attr("cx", function(d) {
+                    return d.x;
+                })
+                .attr("cy", function(d) {
+                    return d.y;
+                });
+        }
+
+        function dragstarted(d) {
+            if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(d) {
+            d.fx = d3.event.x;
+            d.fy = d3.event.y;
+        }
+
+        function dragended(d) {
+            if (!d3.event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+
+
+
+        // var force = d3.layout.force()
+        //     .size([width, height])
+        //     .nodes(nodes)
+        //     .links(links);
+
+        // svg.append('text').text('test').attr('y', 100)
+    </script>
+</body>
