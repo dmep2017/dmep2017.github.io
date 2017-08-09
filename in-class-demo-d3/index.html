@@ -112,11 +112,24 @@
             // console.log(myData)
             var yearIndex = 0
                 // updateChart(myData[yearIndex])
-            d3.interval(function() {
-                console.log(yearIndex)
-                updateChart(myData[yearIndex])
-                yearIndex = (yearIndex + 1) % myData.length
-            }, 1000)
+                // d3.interval(function() {
+            console.log(yearIndex)
+            updateChart(myData[yearIndex])
+            yearIndex = (yearIndex + 1) % myData.length
+                // }, 1000)
+
+
+            var gdpAxis = d3.axisBottom(gdpScale)
+            svg
+                .append('g')
+                .attr('transform', 'translate(0, 150)')
+                .call(gdpAxis)
+
+            var lifeAxis = d3.axisLeft(lifeScale)
+            svg
+                .append('g')
+                .attr('transform', 'translate(20, 0)')
+                .call(lifeAxis)
 
         })
     </script>
