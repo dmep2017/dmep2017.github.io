@@ -21,8 +21,112 @@
         <div class="row">
             <div class="col-xs-12">
                 <h2>Earth Quake Over 6 in 100 Years</h2>
-                <p>Earthquake data</p>
+                <div id="magnitude">
+                    <div><a class="reset" href="javascript:magnitudeDimension.filterAll();dc.redrawAll()">reset</a></div>
+                </div>
+                <div id="latitude">
+                    <div><a class="reset" href="javascript:latitudeDimension.filterAll();dc.redrawAll()">reset</a></div>
+                </div>
+                <div id="longitude">
+                    <div><a class="reset" href="javascript:longitudeDimension.filterAll();dc.redrawAll()">reset</a></div>
+                </div>
+                <div id="elevation">
+                    <div><a class="reset" href="javascript:elevationDimension.filterAll();dc.redrawAll()">reset</a></div>
+                </div>
+                <div id="year">
+                    <div><a class="reset" href="javascript:yearDimension.filterAll();dc.redrawAll()">reset</a></div>
+                </div>
+                <div id="table">
+                </div>
             </div>
+
+            <script>
+                d3.csv('earthquake-lean.csv', function(data) {
+                    var dateFormat = d3.time.format('%Y')
+                    data.forEach(function(e) {
+                        e.dd = dateFormat.parse(e.year);
+                        e.year = d3.time.year(e.dd);
+                        // console.log(e)
+                    });
+
+                    dataset = crossfilter(data);
+
+                    magnitudeDimension = dataset.dimension(function(d) {
+                        return +d.magnitude;
+                    })
+                    magnitudeGroup = magnitudeDimension.group(function(d) {
+                        return d;
+                    })
+                    magnitudeChart = dc.barChart('#magnitude');
+                    magnitudeChart
+                        .width(300)
+                        .height(150)
+                        .margins({
+                            top: 20,
+                            right: 10,
+                            bottom: 20,
+                            left: 50
+                        })
+                        .dimension(magnitudeDimension)
+                        .group(magnitudeGroup)
+                        .x(d3.scale.linear().domain([5, 10]))
+                        .xUnits(dc.units.fp.precision(0.1))
+                        .elasticX(true)
+                        .elasticY(true)
+                        .centerBar(true)
+
+                    yearDimension = dataset.dimension(function(d) {
+                            return d.year;
+                        })
+                        // Identity group: Namely, ever year is a group
+                    yearGroup = yearDimension.group().reduceCount()
+                    yearChart = dc.barChart('#year');
+                    yearChart
+                        .width(600)
+                        .height(150)
+                        .dimension(yearDimension)
+                        .group(yearGroup)
+                        .centerBar(true)
+                        .gap(1)
+                        .x(d3.time.scale().domain([new Date(1908, 0, 1), new Date(2017, 11, 31)]))
+                        .round(d3.time.year.round)
+                        .alwaysUseRounding(true)
+                        .xUnits(d3.time.years)
+                        .margins({
+                            top: 30,
+                            right: 50,
+                            bottom: 25,
+                            left: 40
+                        })
+                        .elasticX(true)
+                        .elasticY(true)
+
+                    earthquakeTable = dc.dataTable('#table');
+                    earthquakeTable
+                        .width(768)
+                        .height(480)
+                        .dimension(magnitudeDimension)
+                        .group(function() {
+                            return 0; // dummy grouping
+                        })
+                        .size(Infinity)
+                        .columns([
+                            'magnitude',
+                            'latitude',
+                            'longitude',
+                            'elevation',
+                            'dd',
+                        ])
+                        .sortBy(function(d) {
+                            return +d.magnitude;
+                        })
+                        .order(d3.descending)
+                        .beginSlice(0)
+                        .endSlice(10)
+
+                    dc.renderAll();
+                })
+            </script>
         </div>
     </div>
 </body>
