@@ -21,18 +21,31 @@
         <div class="row">
             <div class="col-xs-12">
                 <h2>Earth Quake Over 6 in 100 Years</h2>
-                <div id="magnitude">
-                    <div><a class="reset" href="javascript:magnitudeDimension.filterAll();dc.redrawAll()">reset</a></div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div id="magnitude">
+                            <div><a class="reset">reset</a></div>
+                        </div>
+                    </div>
                 </div>
-                <div id="latitude">
-                    <div><a class="reset" href="javascript:latitudeDimension.filterAll();dc.redrawAll()">reset</a></div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div id="latitude">
+                            <div><a class="reset">reset</a></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div id="longitude">
+                            <div><a class="reset">reset</a></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div id="elevation">
+                            <div><a class="reset">reset</a></div>
+                        </div>
+                    </div>
                 </div>
-                <div id="longitude">
-                    <div><a class="reset" href="javascript:longitudeDimension.filterAll();dc.redrawAll()">reset</a></div>
-                </div>
-                <div id="elevation">
-                    <div><a class="reset" href="javascript:elevationDimension.filterAll();dc.redrawAll()">reset</a></div>
-                </div>
+
                 <div id="year">
                     <div><a class="reset" href="javascript:yearDimension.filterAll();dc.redrawAll()">reset</a></div>
                 </div>
@@ -51,29 +64,43 @@
 
                     dataset = crossfilter(data);
 
-                    magnitudeDimension = dataset.dimension(function(d) {
-                        return +d.magnitude;
-                    })
-                    magnitudeGroup = magnitudeDimension.group(function(d) {
-                        return d;
-                    })
-                    magnitudeChart = dc.barChart('#magnitude');
-                    magnitudeChart
-                        .width(300)
-                        .height(150)
-                        .margins({
-                            top: 20,
-                            right: 10,
-                            bottom: 20,
-                            left: 50
+                    var createDimensionBarChart = function(dimensionName, chartID, precision) {
+                        var dimension = dataset.dimension(function(d) {
+                            return +d[dimensionName];
                         })
-                        .dimension(magnitudeDimension)
-                        .group(magnitudeGroup)
-                        .x(d3.scale.linear().domain([5, 10]))
-                        .xUnits(dc.units.fp.precision(0.1))
-                        .elasticX(true)
-                        .elasticY(true)
-                        .centerBar(true)
+                        var group = dimension.group(function(d) {
+                            return Math.floor(d / precision) * precision;
+                        })
+                        var chart = dc.barChart('#' + chartID);
+                        chart
+                            .width(200)
+                            .height(150)
+                            .margins({
+                                top: 20,
+                                right: 10,
+                                bottom: 20,
+                                left: 50
+                            })
+                            .dimension(dimension)
+                            .group(group)
+                            .x(d3.scale.linear().domain([5, 10]))
+                            .xUnits(dc.units.fp.precision(precision))
+                            .elasticX(true)
+                            .elasticY(true)
+                            .centerBar(true)
+
+                        d3
+                            .select('#' + chartID)
+                            .select('a')
+                            .on('click', function() {
+                                dimension.filterAll();
+                                dc.redrawAll();
+                            })
+                    }
+                    createDimensionBarChart('magnitude', 'magnitude', 0.2)
+                    createDimensionBarChart('latitude', 'latitude', 1)
+                    createDimensionBarChart('longitude', 'longitude', 1)
+                    createDimensionBarChart('elevation', 'elevation', 1)
 
                     yearDimension = dataset.dimension(function(d) {
                             return d.year;
@@ -105,7 +132,7 @@
                     earthquakeTable
                         .width(768)
                         .height(480)
-                        .dimension(magnitudeDimension)
+                        .dimension(yearDimension)
                         .group(function() {
                             return 0; // dummy grouping
                         })
