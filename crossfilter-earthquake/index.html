@@ -14,6 +14,14 @@
     <script src="crossfilter.js"></script>
     <script src="dc.js"></script>
 
+    <style>
+        #map {
+            background-image: url(Mercator_projection_SW.jpg);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -22,11 +30,17 @@
             <div class="col-xs-12">
                 <h2>Earth Quake Over 6 in 100 Years</h2>
                 <div class="row">
-                    <div class="col-xs-12">
+                    <div class="col-xs-6">
                         <div id="magnitude">
                             <div><a class="reset">reset</a></div>
                         </div>
                     </div>
+                    <div class="col-xs-6">
+                        <div id="map">
+                            <svg width=320 height=320>   </svg>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="row">
                     <div class="col-xs-4">
@@ -64,6 +78,36 @@
 
                     dataset = crossfilter(data);
 
+                    updateMap = function() {
+                        projection = d3.geo.mercator()
+                            // .scale(30)
+                            .scale((320 - 3) / (2 * Math.PI))
+                            .center([0, 0])
+                            .translate([320 / 2, 320 / 2])
+                            // geoPath = d3
+                            //     .geo.path()
+                            //     .projection(projection)
+                        var svg = d3.select('#map svg');
+                        var filteredRecords = dummyDimension.top(Infinity);
+                        console.log(filteredRecords)
+                        svg
+                            .selectAll('circle').remove()
+                        svg
+                            .selectAll('circle')
+                            .data(filteredRecords)
+                            .enter()
+                            .append('circle')
+                            .style('fill', 'rgba(0,0,0,0)')
+                            .style('stroke', 'rgba(255,0,0,0.2)')
+                            .attr('r', 3)
+                            .attr('cx', function(d) {
+                                return projection([+d.longitude, +d.latitude])[0];
+                            })
+                            .attr('cy', function(d) {
+                                return projection([+d.longitude, +d.latitude])[1];
+                            })
+                    }
+
                     var createDimensionBarChart = function(dimensionName, chartID, precision) {
                         var dimension = dataset.dimension(function(d) {
                             return +d[dimensionName];
@@ -88,6 +132,7 @@
                             .elasticX(true)
                             .elasticY(true)
                             .centerBar(true)
+                            .on('filtered', updateMap)
 
                         d3
                             .select('#' + chartID)
@@ -127,6 +172,7 @@
                         })
                         .elasticX(true)
                         .elasticY(true)
+                        .on('filtered', updateMap)
 
                     earthquakeTable = dc.dataTable('#table');
                     earthquakeTable
@@ -151,6 +197,11 @@
                         .beginSlice(0)
                         .endSlice(10)
 
+                    dummyDimension = dataset.dimension(function() {
+                        return 0
+                    })
+
+                    updateMap()
                     dc.renderAll();
                 })
             </script>
