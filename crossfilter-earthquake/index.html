@@ -47,7 +47,7 @@
                 </div>
 
                 <div id="year">
-                    <div><a class="reset" href="javascript:yearDimension.filterAll();dc.redrawAll()">reset</a></div>
+                    <div><a class="reset" href="javascript:yearChart.filterAll();dc.redrawAll()">reset</a></div>
                 </div>
                 <div id="table">
                 </div>
@@ -93,7 +93,7 @@
                             .select('#' + chartID)
                             .select('a')
                             .on('click', function() {
-                                dimension.filterAll();
+                                chart.filterAll();
                                 dc.redrawAll();
                             })
                     }
