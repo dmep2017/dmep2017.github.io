@@ -21,18 +21,20 @@
     links = [];
     data[0].forEach(function(e) {
         // console.log(e)
-        links.push({
-            source: e[0],
-            target: e[1],
-            value: e[2]
-        })
-        links.push({
-            source: e[1],
-            target: e[0],
-            value: e[3]
-        })
-        nodesDict[e[0]] = 1
-        nodesDict[e[1]] = 1
+        if (e[2] > 100000 || e[3] > 100000) {
+            links.push({
+                source: e[0],
+                target: e[1],
+                value: Math.log10(e[2] / 100000) + 1 //e[2]
+            })
+            links.push({
+                source: e[1],
+                target: e[0],
+                value: Math.log10(e[3] / 100000) + 1 //e[3]
+            })
+            nodesDict[e[0]] = 1
+            nodesDict[e[1]] = 1
+        }
     })
 
     for (e in nodesDict) {
@@ -45,7 +47,7 @@
     // console.log(links)
 </script>
 
-<svg width="300" height="300"></svg>
+<svg width="500" height="500"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
     var svg = d3.select("svg"),
@@ -66,10 +68,10 @@
         // console.log(JSON.stringify(graph));
         // window.graph = graph;
 
-        // graph = {
-        //     "nodes": nodes,
-        //     "links": links
-        // }
+        graph = {
+            "nodes": nodes,
+            "links": links
+        }
 
         var link = svg.append("g")
             .attr("class", "links")
@@ -77,7 +79,7 @@
             .data(graph.links)
             .enter().append("line")
             .attr("stroke-width", function(d) {
-                return Math.sqrt(d.value);
+                return d.value;
             });
 
         var node = svg.append("g")
