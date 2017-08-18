@@ -95,6 +95,26 @@
         .snippet {
             font-size: 2em;
         }
+        
+        .slide-thumbnail {
+            width: 100%;
+            filter: blur(1px) opacity(0.7);
+            height: 300px;
+            border-top: solid 1px #777;
+            border-bottom: solid 1px #777;
+            margin-bottom: 0.4em;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .slide iframe {
+            border-top: solid 1px #777;
+            border-bottom: solid 1px #777;
+        }
+        
+        .slide h3 {
+            font-size: 1.3em;
+        }
     </style>
 
 </head>
@@ -126,7 +146,7 @@
             </div>
         </div>
 
-        <div class='section'>
+        <div class='section active'>
             <div class="container">
                 <div class="row">
                     <h2 class="heading">Slides</h2>
@@ -151,7 +171,7 @@
             <div class="container">
                 <div class="row">
                     <h2>Team</h2>
-                    <div class="col-xs-12 col-md-8 col-md-offset-2">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
                         <div class="snippet animated fadeInDown" style="animation-delay: 0s;">
                             Instructor: Pili Hu</div>
                         <div class="snippet animated fadeInDown" style="animation-delay: 0.2s;">
@@ -176,7 +196,9 @@
 
             slides.forEach(function(element) {
                 // var htmlAnchor = ` <a href="https://docs.google.com/presentation/d/${element.id}/edit#slide=id.p">${element.name}</a>`
-                var htmlAnchor = ` <a class="btn btn-default">${element.name}</a> <br>(Click to show slides)`
+                var htmlAnchor = `<a class="show-slide btn btn-default">Show Slide</a>`
+                var htmlHeading = `<h3>${element.name}</h3>`
+                var htmlImage = `<div class="slide-thumbnail" style="background-image: url(images/${element.image})"></div>`
 
                 var htmlIFrame = `
                 <div class='google-slides'>
@@ -185,11 +207,15 @@
                 `
 
                 var thisSlide = $('<div>')
-                thisSlide
-                    .addClass('slide')
-                    .html(htmlAnchor)
-                    .appendTo('#slides-set')
+                thisSlide.addClass('slide')
+                $(htmlHeading).appendTo(thisSlide)
+                $(htmlImage).appendTo(thisSlide)
+                $(htmlAnchor).appendTo(thisSlide)
+
+                thisSlide.appendTo('#slides-set')
                 thisSlide.find('a').click(function() {
+                    thisSlide.html('')
+                    $(htmlHeading).appendTo(thisSlide)
                     $(htmlIFrame).appendTo(thisSlide)
                 })
             }, this);
