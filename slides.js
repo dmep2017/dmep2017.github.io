@@ -22,4 +22,10 @@ slides = [{
 }, {
     name: 'Day 8 - Mapping',
     id: '17Xt7QPz5QK_fMwM7QtztpK6Nj_-7_ufJ9qkSc407GCE'
+}, {
+    name: 'Day 9 - Graph',
+    id: '1ezsqMgqAxA1g6pZd4qqasBLP2vwDPswGeSLns6V3YQc'
+}, {
+    name: 'Day 10 - Miscellaneous',
+    id: '1oPGj9rbcYZEUEGFjorll8iA-tTUbUqJMwgJ6bBw86E8'
 }]
