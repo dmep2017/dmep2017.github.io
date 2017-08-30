@@ -124,7 +124,7 @@
 <body>
 
     <div id='fullpage'>
-        <div class='section' id="cover">
+        <div class='section' id="cover-page">
             <div class="container">
                 <div class="row">
                     <h2 class="heading">DMEP2017</h2>
@@ -148,7 +148,7 @@
             </div>
         </div>
 
-        <div class='section' id="slides">
+        <div class='section' id="slides-page">
             <div class="container">
                 <div class="row">
                     <h2 class="heading">Slides</h2>
@@ -159,7 +159,7 @@
             </div>
 
         </div>
-        <div class='section' id="student">
+        <div class='section' id="student-page">
             <div class="container">
                 <div class="row">
                     <h2>Students</h2>
@@ -169,7 +169,7 @@
                 </div>
             </div>
         </div>
-        <div class='section' id="team">
+        <div class='section' id="team-page">
             <div class="container">
                 <div class="row">
                     <h2>Team</h2>
@@ -273,12 +273,12 @@
                     // Entering last page! (team)
                     if (index == 3 && direction == 'down') {
                         console.log("Entering last page! (team)");
-                        $('#team div')
+                        $('#team-page div')
                             .addClass('animated')
                             .addClass('fadeInDown')
                     }
-                }
-
+                },
+                anchors: ['cover', 'slides', 'student', 'team'],
             });
         });
     </script>
