@@ -69,12 +69,12 @@
         
         .fp-controlArrow.fp-next {
             border-color: transparent transparent transparent #d2e4ec !important;
-            border-width: 23.5px 0 23.5px 53px;
+            border-width: 23.5px 0 23.5px 33px;
         }
         
         .fp-controlArrow.fp-prev {
             border-color: transparent #d2e4ec transparent transparent !important;
-            border-width: 23.5px 53px 23.5px 0;
+            border-width: 23.5px 33px 23.5px 0;
         }
         
         .student img {
@@ -89,7 +89,9 @@
         
         .student .links {
             text-align: center;
-            font-size: 1.7em
+            font-size: 1.4em;
+            line-height: 1.7;
+            font-weight: 200;
         }
         
         .snippet {
@@ -157,7 +159,7 @@
             </div>
 
         </div>
-        <div class='section'>
+        <div class='section active'>
             <div class="container">
                 <div class="row">
                     <h2>Students</h2>
@@ -237,9 +239,12 @@
                         <img src="${element.avatarUrl}">
                     </div>
                     <div class="links col-sm-8">
+                        <a href="${element.final}">FINAL PROJECT</a>
+                        <br>
                         <a href="${element.url}">PORTFOLIO</a>
                         <br>
                         <a href="//github.com/${element.githubHandle}">GITHUB</a>
+                        <br>
                     </div>
                     <div class="introduction">
                     </div>
