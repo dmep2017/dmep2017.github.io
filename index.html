@@ -173,25 +173,25 @@
             <div class="container">
                 <div class="row">
                     <h2>Team</h2>
-                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-                        <div class="snippet animated fadeInDown" style="animation-delay: 0s;">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4" id="team">
+                        <div class="snippet" style="animation-delay: 0s;">
                             Python: Allison Parrish</div>
-                        <div class="snippet animated fadeInDown" style="animation-delay: 0.4s;">
+                        <div class="snippet" style="animation-delay: 0.4s;">
                             Frontend: Pili Hu</div>
-                        <div class="snippet animated fadeInDown" style="animation-delay: 0.8s;">
+                        <div class="snippet" style="animation-delay: 0.8s;">
                             Infographics: Alberto Cairo
                         </div>
-                        <div class="snippet animated fadeInDown" style="animation-delay: 1.2s;">
+                        <div class="snippet" style="animation-delay: 1.2s;">
                             Project: Zhimin Huang
                         </div>
-                        <div class="snippet animated fadeInDown" style="animation-delay: 1.6s;">
+                        <div class="snippet" style="animation-delay: 1.6s;">
                             Project: Weiming Ye
                         </div>
-                        <div class="snippet animated fadeInDown" style="animation-delay: 2s;">
+                        <div class="snippet" style="animation-delay: 2s;">
                             Sponsor: USCET</div>
-                        <div class="snippet animated fadeInDown" style="animation-delay: 2.4s;">
+                        <div class="snippet" style="animation-delay: 2.4s;">
                             Sponsor: PHBS</div>
-                        <div class="snippet animated fadeInDown" style="animation-delay: 2.8s;">
+                        <div class="snippet" style="animation-delay: 2.8s;">
                             Sponsor: DataWorks</div>
                     </div>
                 </div>
@@ -267,6 +267,18 @@
 
             $('#fullpage').fullpage({
                 verticalCentered: false,
+                onLeave: function(index, nextIndex, direction) {
+                    var leavingSection = $(this);
+
+                    // Entering last page! (team)
+                    if (index == 3 && direction == 'down') {
+                        console.log("Entering last page! (team)");
+                        $('#team div')
+                            .addClass('animated')
+                            .addClass('fadeInDown')
+                    }
+                }
+
             });
         });
     </script>
